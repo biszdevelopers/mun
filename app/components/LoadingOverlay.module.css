@@ -15,7 +15,7 @@
 }
 
 .globe {
-  --diameter: clamp(7.75rem, 27vmin, 12rem);
+  --diameter: var(--globe-diameter, clamp(7.75rem, 27vmin, 12rem));
   --map-width: calc(var(--diameter) * 2.4);
   --map-start: calc(var(--diameter) * -0.7);
 
@@ -24,8 +24,8 @@
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 50%;
-  background: var(--color-secondary-50);
-  box-shadow: 0 0 0 1px var(--color-secondary-200);
+  background: var(--globe-surface, var(--color-secondary-50));
+  box-shadow: 0 0 0 1px var(--globe-outline, var(--color-secondary-200));
 }
 
 .globe::before {
@@ -34,14 +34,14 @@
   content: "";
   background: repeating-linear-gradient(
     to bottom,
-    var(--color-secondary-400) 0 1px,
-    transparent 1px 3px
+    var(--globe-land, var(--color-secondary-400)) 0 var(--globe-line, 1px),
+    transparent var(--globe-line, 1px) var(--globe-stripe, 3px)
   );
   mask-image: url("./world-land.svg");
   mask-size: var(--map-width) 100%;
   mask-position: var(--map-start) center;
   mask-repeat: repeat-x;
-  animation: rotate-map 9s linear infinite;
+  animation: rotate-map var(--globe-duration, 9s) linear infinite;
 }
 
 .label {

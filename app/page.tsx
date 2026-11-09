@@ -1,162 +1,40 @@
+import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
-import { LoadingGlobe } from "./components/LoadingOverlay";
 
-const headingSizes = [
-  { level: 1, size: "3rem", className: "text-heading-1" },
-  { level: 2, size: "2.25rem", className: "text-heading-2" },
-  { level: 3, size: "1.875rem", className: "text-heading-3" },
-  { level: 4, size: "1.5rem", className: "text-heading-4" },
-  { level: 5, size: "1.25rem", className: "text-heading-5" },
-  { level: 6, size: "1.125rem", className: "text-heading-6" },
-];
+import LatestAlert from "./components/LatestAlert";
+import { Globe } from "./components/LoadingOverlay";
+import { Button } from "./components/ui/button";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Brand Palette",
-  description: "The primary and secondary colors in the brand palette.",
+  title: "BISZ MUN",
+  description: "BISZ Model United Nations.",
 };
-
-const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
-
-const palettes = [
-  {
-    name: "Primary",
-    token: "primary",
-    description: "bg blue",
-    defaultHex: "#3255a4",
-    defaultClass: "bg-primary",
-    colors: [
-      ["bg-primary-50", "#f4f8ff"],
-      ["bg-primary-100", "#e5edff"],
-      ["bg-primary-200", "#cbddff"],
-      ["bg-primary-300", "#a7c3fa"],
-      ["bg-primary-400", "#7da2f1"],
-      ["bg-primary-500", "#5883e2"],
-      ["bg-primary-600", "#406acb"],
-      ["bg-primary-700", "#3255a4"],
-      ["bg-primary-800", "#274483"],
-      ["bg-primary-900", "#1f3463"],
-      ["bg-primary-950", "#101f3f"],
-    ],
-  },
-  {
-    name: "Secondary",
-    token: "secondary",
-    description: "white",
-    defaultHex: "#ffffff",
-    defaultClass: "bg-secondary",
-    colors: [
-      ["bg-secondary-50", "#fafafa"],
-      ["bg-secondary-100", "#f5f5f5"],
-      ["bg-secondary-200", "#e5e5e5"],
-      ["bg-secondary-300", "#d4d4d4"],
-      ["bg-secondary-400", "#a1a1a1"],
-      ["bg-secondary-500", "#737373"],
-      ["bg-secondary-600", "#525252"],
-      ["bg-secondary-700", "#404040"],
-      ["bg-secondary-800", "#262626"],
-      ["bg-secondary-900", "#171717"],
-      ["bg-secondary-950", "#0a0a0a"],
-    ],
-  },
-];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-secondary-50 px-4 py-8 text-secondary-950 sm:px-8 sm:py-12">
-      <div className="mx-auto max-w-7xl">
-        biszmun
-
-        {palettes.map((palette) => (
-          <section
-            key={palette.token}
-            aria-labelledby={`${palette.token}-heading`}
-          >
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <h2 id={`${palette.token}-heading`} className="m-0">
-                  {palette.name}
-                </h2>
-              </div>
-              <div>
-                <code className="text-secondary-600">{palette.defaultHex}</code>
-              </div>
-            </div>
-
-            <ul>
-              {palette.colors.map(([colorClass, hex], index) => (
-                <li key={colorClass}>
-                  <div
-                    aria-hidden="true"
-                    className={`h-14 rounded-lg border border-solid border-secondary-200 sm:h-16 ${colorClass}`}
-                  />
-                  <div className="mt-2 text-sm font-bold">{shades[index]}</div>
-                  <code className="text-xs text-secondary-600">{hex}</code>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-
-        <section
-          aria-labelledby="loader-demo-heading"
-          className="mt-5 rounded-2xl border border-solid border-secondary-200 bg-secondary p-4 sm:p-6"
-        >
-          <h2 id="loader-demo-heading" className="m-0">Loading animation</h2>
-          <div className="mt-4 grid place-items-center rounded-xl border border-solid border-secondary-200 py-8">
-            <LoadingGlobe />
-          </div>
-        </section>
-
-        <section
-          aria-labelledby="text-sizes-heading"
-          className="mt-5 rounded-2xl border border-solid border-secondary-200 bg-secondary p-4 sm:p-6"
-        >
-          <h2 id="text-sizes-heading" className="m-0">Text sizes</h2>
-          <ul className="mt-4 mb-0 list-none p-0">
-            {headingSizes.map(({ level, size, className }) => (
-              <li key={level} className="border-0 border-t border-solid border-secondary-200 py-4">
-                <div className="text-caption text-secondary-600">H{level} · {size}</div>
-                <div className={`${className} mt-1 font-semibold leading-tight`}>Heading {level}</div>
-              </li>
-            ))}
-            <li className="border-0 border-t border-solid border-secondary-200 py-4">
-              <div className="text-caption text-secondary-600">Paragraph · 1.125rem · 400</div>
-              <p className="mt-1 mb-0 max-w-prose">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </li>
-            <li className="border-0 border-t border-solid border-secondary-200 py-4">
-              <div className="text-caption text-secondary-600">UI text · 1rem</div>
-              <div className="mt-1 text-ui">View conference schedule</div>
-            </li>
-            <li className="border-0 border-t border-solid border-secondary-200 pt-4">
-              <div className="text-caption text-secondary-600">Small text · 0.875rem</div>
-              <small className="mt-1 block">For captions, credits, and supporting notes.</small>
-            </li>
-          </ul>
-
-          <article aria-labelledby="specimen-heading" className="mt-6 rounded-xl bg-secondary-50 p-4 sm:p-6">
-            <header>
-              <small className="block text-secondary-600">Article specimen</small>
-              <h3 id="specimen-heading" className="mt-2 mb-0">Getting ready for committee</h3>
-            </header>
-            <p className="mt-3 mb-0 max-w-prose">
-              Before the first session, read the background guide and identify the questions your
-              delegation needs to answer. Write down <strong>one priority</strong> you can explain
-              clearly in an opening statement.
-            </p>
-            <h4 className="mt-5 mb-0">Bring a short reference sheet</h4>
-            <p className="mt-2 mb-0 max-w-prose">
-              Keep key facts and source notes on one page so you can find them quickly during debate.
-              Use the <a href="#primary-heading" className="text-primary underline">primary palette</a>{" "}
-              to highlight the items you need to scan at a glance.
-            </p>
-            <footer className="mt-4">
-              <small className="text-secondary-600">Delegate preparation notes</small>
-            </footer>
-          </article>
-        </section>
+    <main className={styles.hero} data-page-theme="light">
+      <Globe className={styles.globe} />
+      <div className={styles.bookmark} />
+      <LatestAlert
+        className={`${styles.alert}`}
+        date="November 9th, 2026"
+        dateTime="2026-11-09"
+        title="Committee Applications Open"
+        body="MUN committee applications are now open! Apply to be a part of BISZ MUN 2027."
+      >
+        <Button asChild className="mt-2">
+          <a href="https://bisz.dev/Committees2027" target="_blank" rel="noopener noreferrer">
+            Committee Applications
+            <ExternalLink aria-hidden="true" />
+          </a>
+        </Button>
+      </LatestAlert>
+      <div className={styles.heading}>
+        <h1 className={styles.title}>BISZ<span className={styles.mun}>MUN</span></h1>
+        <time className={`text-serif ${styles.date}`} dateTime="2026-02-27">
+          February 27th, 2026
+        </time>
       </div>
     </main>
   );
