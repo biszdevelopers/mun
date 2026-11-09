@@ -1,0 +1,64 @@
+.overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: var(--color-secondary);
+}
+
+.indicator {
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  color: var(--color-secondary-600);
+}
+
+.globe {
+  --diameter: clamp(7.75rem, 27vmin, 12rem);
+  --map-width: calc(var(--diameter) * 2.4);
+  --map-start: calc(var(--diameter) * -0.7);
+
+  position: relative;
+  width: var(--diameter);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-secondary-50);
+  box-shadow: 0 0 0 1px var(--color-secondary-200);
+}
+
+.globe::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-secondary-400) 0 1px,
+    transparent 1px 3px
+  );
+  mask-image: url("./world-land.svg");
+  mask-size: var(--map-width) 100%;
+  mask-position: var(--map-start) center;
+  mask-repeat: repeat-x;
+  animation: rotate-map 9s linear infinite;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes rotate-map {
+  to {
+    mask-position: calc(var(--map-start) - var(--map-width)) center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globe::before {
+    animation: none;
+  }
+}

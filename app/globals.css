@@ -1,8 +1,84 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme static {
+  --color-primary: var(--color-primary-700);
+  --color-primary-50: #f4f8ff;
+  --color-primary-100: #e5edff;
+  --color-primary-200: #cbddff;
+  --color-primary-300: #a7c3fa;
+  --color-primary-400: #7da2f1;
+  --color-primary-500: #5883e2;
+  --color-primary-600: #406acb;
+  --color-primary-700: #3255a4;
+  --color-primary-800: #274483;
+  --color-primary-900: #1f3463;
+  --color-primary-950: #101f3f;
+
+  --color-secondary: var(--color-white);
+  --color-secondary-50: var(--color-neutral-50);
+  --color-secondary-100: var(--color-neutral-100);
+  --color-secondary-200: var(--color-neutral-200);
+  --color-secondary-300: var(--color-neutral-300);
+  --color-secondary-400: var(--color-neutral-400);
+  --color-secondary-500: var(--color-neutral-500);
+  --color-secondary-600: var(--color-neutral-600);
+  --color-secondary-700: var(--color-neutral-700);
+  --color-secondary-800: var(--color-neutral-800);
+  --color-secondary-900: var(--color-neutral-900);
+  --color-secondary-950: var(--color-neutral-950);
+
+  --text-heading-1: 3rem;
+  --text-heading-2: 2.25rem;
+  --text-heading-3: 1.875rem;
+  --text-heading-4: 1.5rem;
+  --text-heading-5: 1.25rem;
+  --text-heading-6: 1.125rem;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+  --text-ui: 1rem;
+  --text-caption: 0.875rem;
+}
+
 :root {
   color-scheme: light dark;
-  font-family: Arial, Helvetica, sans-serif;
   background: #f5f5f5;
   color: #171717;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h1 { font-size: var(--text-heading-1); }
+  h2 { font-size: var(--text-heading-2); }
+  h3 { font-size: var(--text-heading-3); }
+  h4 { font-size: var(--text-heading-4); }
+  h5 { font-size: var(--text-heading-5); }
+  h6 { font-size: var(--text-heading-6); }
+
+  p {
+    font-family: var(--font-noto-serif), Georgia, serif;
+    font-size: var(--text-body);
+    font-weight: 500;
+    line-height: var(--text-body--line-height);
+  }
+
+  p :is(b, strong) {
+    font-weight: 900;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: var(--text-ui);
+  }
+
+  small {
+    font-size: var(--text-caption);
+  }
 }
 
 * {
@@ -19,62 +95,9 @@ body {
   min-width: 320px;
 }
 
-main {
-  display: grid;
-  min-height: 100vh;
-  place-items: center;
-  padding: 24px;
-}
-
-.card {
-  width: min(100%, 640px);
-  padding: 48px;
-  border: 1px solid #dedede;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 18px 60px rgb(0 0 0 / 8%);
-}
-
-.eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-h1 {
-  margin: 16px 0 12px;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-p {
-  margin: 0;
-  color: #666666;
-  font-size: 1.05rem;
-}
-
-code {
-  border-radius: 6px;
-  background: #eeeeee;
-  padding: 3px 6px;
-  color: #171717;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     background: #0a0a0a;
     color: #ededed;
-  }
-
-  .card {
-    border-color: #2a2a2a;
-    background: #151515;
-    box-shadow: none;
-  }
-
-  p {
-    color: #a8a8a8;
   }
 }
