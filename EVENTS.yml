@@ -1,0 +1,35 @@
+# Last updated: Nov 10 2026
+
+# The static object id of this event manifest is 662c733a30c169ab27e2fe6acaa25db0fa32e3e1ce822aa6f7fb18d789faa233.
+# Apply changes here: https://noesis.bisz.dev/projects/0cdb2759-a361-4083-8ff6-1c590b4331a7#files
+#
+# !!! ABILITY TO EDIT DOES NOT MEAN PERMISSION TO EDIT !!!
+# 
+# THIS FILE DICTATES OFFICIAL EVENTS AND DETAILS. UNINTENDED EDITING WILL CAUSE 
+# MISINFORMATION. EDITING WITHOUT PERMISSION IS STRICTLY PROHIBITED. 
+#
+# CONTACT THE FOLLOWING FOR MISINFORMATION AND ERRORS WHEN SPOTTED ASAP:
+#
+# IT Support
+# Eric Wong - ChunPing.Wong12024-bisz@basischina.com
+# Richard Jiang - Zhiyu.Jiang90454-bisz@basischina.com
+#
+# BISZMUN Organizers
+# Emma Lin - Ching.Lin90571-bisz@basischina.com
+# Jayden Lee - JaydenJiaXing.Lee17509-bisz@basischina.com
+#
+
+# Configures main page top right content.
+hero:
+
+  # Issued time
+  time: 2026-11-09T09:00:00+08:00
+
+  # Title of the hero section.
+  title: "Chair Applications Open"
+
+  # Subtitle of the hero section.
+  subtitle: "BISZMUN chair applications are now open! Apply to be a part of BISZ MUN 2027."
+
+  # hard coded stuff. this one shows log in button
+  hard_code: "show_chair_application_button"

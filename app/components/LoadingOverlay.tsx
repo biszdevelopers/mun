@@ -18,9 +18,9 @@ export function LoadingGlobe() {
   );
 }
 
-export default function LoadingOverlay() {
+export default function LoadingOverlay({ className }: { className?: string }) {
   return (
-    <div className={styles.overlay} role="status">
+    <div className={className ? `${styles.overlay} ${className}` : styles.overlay} role="status">
       <LoadingGlobe />
     </div>
   );

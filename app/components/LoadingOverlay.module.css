@@ -45,10 +45,9 @@
 }
 
 .label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: var(--text-heading-6);
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 @keyframes rotate-map {
