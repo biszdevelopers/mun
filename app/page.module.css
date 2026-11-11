@@ -1,6 +1,7 @@
 .scrollScene {
   position: relative;
-  min-height: 200dvh;
+  /* One viewport each for the stage and the slide, then half for the hold. */
+  min-height: 220dvh;
 }
 
 .scrollStage {
@@ -20,6 +21,155 @@
   transform: translateY(100%);
 }
 
+.sectionThree {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: 5dvh 5vw;
+  overflow: clip;
+  background-color: white;
+  color: black;
+}
+
+.sectionThreeCopy {
+  max-width: 28rem;
+  overflow-wrap: anywhere;
+}
+
+.sectionThreeCopy h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 3.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.sectionThreeCopy p {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.collage {
+  position: relative;
+  width: min(100%, 90dvh * 400 / 415);
+  aspect-ratio: 400 / 415;
+  justify-self: center;
+}
+
+.collageArtwork {
+  position: absolute;
+  inset: 0;
+  scale: 1.16;
+  transform-origin: 35% center;
+  perspective: 850px;
+  /* Keep the vanishing point at the center of the middle panel. */
+  perspective-origin: 49.875% 42.53%;
+}
+
+@media (max-width: 47.99rem) {
+  .sectionThree {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+  }
+
+  .sectionThreeCopy {
+    justify-self: center;
+  }
+
+  .collageArtwork {
+    scale: 1.1;
+    transform-origin: center;
+  }
+}
+
+.collageTile {
+  position: absolute;
+  background-color: var(--color-primary-100);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .collageTile {
+    opacity: 0;
+  }
+}
+
+.topLeft {
+  inset: 6.747% 66.75% 70.602% 8.75%;
+}
+
+.topMiddle {
+  inset: 0% 44.5% 70.602% 35.25%;
+  background-color: var(--color-primary-200);
+}
+
+.topRight {
+  inset: 10.361% 18% 70.602% 57.5%;
+}
+
+.middleLeft {
+  inset: 31.325% 60.75% 35.663% 0%;
+  background-color: var(--color-primary-50);
+}
+
+.middleCenter {
+  inset: 31.325% 41.5% 46.265% 41.25%;
+}
+
+.middleRight {
+  inset: 31.325% 0% 46.265% 60.5%;
+  background-color: var(--color-primary-50);
+}
+
+.bottomLeft {
+  inset: 66.265% 60.75% 8.675% 13%;
+}
+
+.bottomCenter {
+  inset: 55.663% 29.25% 0% 41.25%;
+  background-color: var(--color-primary-200);
+}
+
+.bottomRight {
+  inset: 55.663% 5% 12.289% 72.75%;
+}
+
+@media (min-width: 64rem) {
+  .collageArtwork {
+    perspective-origin: 58.125% 42.53%;
+  }
+
+  .topLeft {
+    top: 4.096%;
+    left: -12.25%;
+  }
+
+  .topRight {
+    top: 7.229%;
+    right: 2.5%;
+  }
+
+  .middleCenter {
+    right: 25%;
+  }
+
+  .middleRight {
+    right: -17.5%;
+    left: 77%;
+  }
+
+  .bottomLeft {
+    bottom: 2.169%;
+    left: -18.5%;
+  }
+
+  .bottomRight {
+    right: -4.25%;
+    bottom: 8.916%;
+  }
+}
+
 .ctaTheme {
   display: flex;
   min-height: 100dvh;
@@ -28,6 +178,7 @@
   justify-content: center;
   padding: clamp(1.5rem, 6vw, 6rem);
   text-align: center;
+  background: url("/un-emblem-outline.svg") center / min(82vw, 68dvh, 40rem) auto no-repeat;
 }
 
 .ctaThemeLabel {
@@ -134,7 +285,7 @@
 }
 
 .mun {
-  color: #009edb;
+  color: var(--color-un);
 }
 
 .date {

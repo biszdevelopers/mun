@@ -16,6 +16,20 @@
   --color-primary-900: #1f3463;
   --color-primary-950: #101f3f;
 
+  /* Official UN blue (#009edb) is the pivot of the scale. */
+  --color-un: var(--color-un-500);
+  --color-un-50: #eef9ff;
+  --color-un-100: #dcf2ff;
+  --color-un-200: #bce5fe;
+  --color-un-300: #8cd1fa;
+  --color-un-400: #55b8ed;
+  --color-un-500: #009edb;
+  --color-un-600: #0086be;
+  --color-un-700: #006d9c;
+  --color-un-800: #00557b;
+  --color-un-900: #003e5a;
+  --color-un-950: #002639;
+
   --color-secondary: var(--color-white);
   --color-secondary-50: var(--color-neutral-50);
   --color-secondary-100: var(--color-neutral-100);
@@ -55,6 +69,11 @@
 }
 
 @layer base {
+  ::selection {
+    background-color: var(--color-un);
+    color: var(--color-white);
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.25;
@@ -121,6 +140,18 @@ body {
     --color-primary-800: #5883e2;
     --color-primary-900: #a7c3fa;
     --color-primary-950: #f4f8ff;
+
+    /* Invert the UN scale around un-500; --color-un stays #009edb. */
+    --color-un-50: #002639;
+    --color-un-100: #003e5a;
+    --color-un-200: #00557b;
+    --color-un-300: #006d9c;
+    --color-un-400: #0086be;
+    --color-un-600: #55b8ed;
+    --color-un-700: #8cd1fa;
+    --color-un-800: #bce5fe;
+    --color-un-900: #dcf2ff;
+    --color-un-950: #eef9ff;
 
     --color-secondary: var(--color-black);
     --color-secondary-50: var(--color-neutral-950);

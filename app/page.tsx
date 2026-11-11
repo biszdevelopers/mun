@@ -7,7 +7,7 @@ import LatestAlert from "./components/LatestAlert";
 import HeroScroll from "./components/HeroScroll";
 import LoadingOverlay, { Globe } from "./components/LoadingOverlay";
 import { Button } from "./components/ui/button";
-import { getHeroTheme, getLatestEvent } from "./lib/events";
+import { getHeroTheme, getHeroThemeDescription, getLatestEvent } from "./lib/events";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -15,11 +15,9 @@ export const metadata: Metadata = {
   description: "BISZ Model United Nations.",
 };
 
-export default async function Home() {
-  const theme = await getHeroTheme();
-
+export default function Home() {
   return (
-    <HeroScroll theme={theme}>
+    <HeroScroll theme={<Suspense fallback={null}><HomeTheme /></Suspense>} theme_description={<Suspense fallback={null}><HomeThemeDescription /></Suspense>}>
       <section className={styles.hero}>
         <LoadingOverlay className={styles.loading} />
         <Suspense fallback={null}>
@@ -32,6 +30,16 @@ export default async function Home() {
       </section>
     </HeroScroll>
   );
+}
+
+async function HomeTheme() {
+  await connection();
+  return getHeroTheme();
+}
+
+async function HomeThemeDescription() {
+  await connection();
+  return getHeroThemeDescription();
 }
 
 async function HomeContent() {

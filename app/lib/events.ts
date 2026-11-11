@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { createRemoteAsset } from "./remote-asset";
 
-const assetUrl = "https://assets.bisz.dev/662c733a30c169ab27e2fe6acaa25db0fa32e3e1ce822aa6f7fb18d789faa233";
+const assetUrl = process.env.YAML_SOURCE_EVENTS?.trim();
 const eventDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Shanghai",
   year: "numeric",
@@ -33,7 +33,7 @@ function parseEvent(source: string) {
     throw new Error("Missing hero event");
   }
 
-  const { time, title, subtitle, hard_code, theme } = config.hero;
+  const { time, title, subtitle, hard_code, theme, theme_description } = config.hero;
   if (
     typeof time !== "string" ||
     !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(time) ||
@@ -43,7 +43,8 @@ function parseEvent(source: string) {
     typeof subtitle !== "string" ||
     !subtitle.trim() ||
     (hard_code !== undefined && typeof hard_code !== "string") ||
-    (theme !== undefined && typeof theme !== "string")
+    (theme !== undefined && typeof theme !== "string") ||
+    (theme_description !== undefined && typeof theme_description !== "string")
   ) {
     throw new Error("Invalid hero event");
   }
@@ -60,19 +61,23 @@ function parseEvent(source: string) {
     body: subtitle.trim(),
     applicationLink: applicationLinks.get(hard_code ?? ""),
     theme,
+    theme_description
   };
 }
 
-const readRemoteEvent = createRemoteAsset(assetUrl, parseEvent);
+const readRemoteEvent = assetUrl ? createRemoteAsset(assetUrl, parseEvent) : undefined;
 let localEvent: Promise<ReturnType<typeof parseEvent> | undefined> | undefined;
 
 export async function getHeroTheme() {
-  const source = await readFile(join(process.cwd(), "EVENTS.yml"), "utf8");
-  return parseEvent(source).theme ?? "";
+  return (await getLatestEvent())?.theme ?? "";
+}
+
+export async function getHeroThemeDescription() {
+  return (await getLatestEvent())?.theme_description ?? "";
 }
 
 export async function getLatestEvent() {
-  const event = await readRemoteEvent();
+  const event = await readRemoteEvent?.();
   if (event) return event;
 
   localEvent ??= readFile(join(process.cwd(), "EVENTS.yml"), "utf8")

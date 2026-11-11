@@ -19,7 +19,7 @@ const headingSizes = [
 
 export const metadata: Metadata = {
   title: "Brand Palette",
-  description: "The primary and secondary colors in the brand palette.",
+  description: "The primary, UN, and secondary colors in the brand palette.",
 };
 
 const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
@@ -44,6 +44,27 @@ const palettes = [
       ["bg-primary-800", "#274483", "#5883e2"],
       ["bg-primary-900", "#1f3463", "#a7c3fa"],
       ["bg-primary-950", "#101f3f", "#f4f8ff"],
+    ],
+  },
+  {
+    name: "UN",
+    token: "un",
+    description: "official UN blue",
+    defaultHex: "#009edb",
+    darkDefaultHex: "#009edb",
+    defaultClass: "bg-un",
+    colors: [
+      ["bg-un-50", "#eef9ff"],
+      ["bg-un-100", "#dcf2ff"],
+      ["bg-un-200", "#bce5fe"],
+      ["bg-un-300", "#8cd1fa"],
+      ["bg-un-400", "#55b8ed"],
+      ["bg-un-500", "#009edb"],
+      ["bg-un-600", "#0086be"],
+      ["bg-un-700", "#006d9c"],
+      ["bg-un-800", "#00557b"],
+      ["bg-un-900", "#003e5a"],
+      ["bg-un-950", "#002639"],
     ],
   },
   {

@@ -34,6 +34,6 @@ hero:
   # hard coded stuff. this one shows log in button
   hard_code: "show_chair_application_button"
 
-  theme: "Redefining Responsibility"
+  theme: "Redefining Responsibilities"
 
-  theme_description: ""
+  theme_description: "Stopping AI"
