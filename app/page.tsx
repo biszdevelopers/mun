@@ -1,9 +1,10 @@
-import { ExternalLink } from "lucide-react";
+import { ArrowDown, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 
 import LatestAlert from "./components/LatestAlert";
+import HeroScroll from "./components/HeroScroll";
 import LoadingOverlay, { Globe } from "./components/LoadingOverlay";
 import { Button } from "./components/ui/button";
 import { getLatestEvent } from "./lib/events";
@@ -16,16 +17,24 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className={styles.hero} data-page-theme="light">
-      <LoadingOverlay className={styles.loading} />
-      <Suspense fallback={null}>
-        <HomeContent />
-      </Suspense>
-    </main>
+    <HeroScroll>
+      <section className={styles.hero}>
+        <LoadingOverlay className={styles.loading} />
+        <Suspense fallback={null}>
+          <HomeContent />
+        </Suspense>
+        <div className={styles.scrollCue}>
+          <span>Scroll for more</span>
+          <ArrowDown aria-hidden="true" size={20} strokeWidth={1.5} />
+        </div>
+      </section>
+    </HeroScroll>
   );
 }
 
 async function HomeContent() {
+
+  // sec 1
   await connection();
   const event = await getLatestEvent();
 

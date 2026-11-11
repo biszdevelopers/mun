@@ -24,8 +24,8 @@ const notoSerif = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Starter",
-  description: "A minimal Next.js application.",
+  title: "MISZMUN",
+  description: "MUN website",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
