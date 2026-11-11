@@ -34,4 +34,6 @@ hero:
   # hard coded stuff. this one shows log in button
   hard_code: "show_chair_application_button"
 
-  theme: "Redefining\nResponsibility"
+  theme: "Redefining Responsibility"
+
+  theme_description: ""
