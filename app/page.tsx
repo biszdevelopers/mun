@@ -7,7 +7,7 @@ import LatestAlert from "./components/LatestAlert";
 import HeroScroll from "./components/HeroScroll";
 import LoadingOverlay, { Globe } from "./components/LoadingOverlay";
 import { Button } from "./components/ui/button";
-import { getLatestEvent } from "./lib/events";
+import { getHeroTheme, getLatestEvent } from "./lib/events";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -15,9 +15,11 @@ export const metadata: Metadata = {
   description: "BISZ Model United Nations.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const theme = await getHeroTheme();
+
   return (
-    <HeroScroll>
+    <HeroScroll theme={theme}>
       <section className={styles.hero}>
         <LoadingOverlay className={styles.loading} />
         <Suspense fallback={null}>

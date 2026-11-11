@@ -33,7 +33,7 @@ function parseEvent(source: string) {
     throw new Error("Missing hero event");
   }
 
-  const { time, title, subtitle, hard_code } = config.hero;
+  const { time, title, subtitle, hard_code, theme } = config.hero;
   if (
     typeof time !== "string" ||
     !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(time) ||
@@ -42,7 +42,8 @@ function parseEvent(source: string) {
     !title.trim() ||
     typeof subtitle !== "string" ||
     !subtitle.trim() ||
-    (hard_code !== undefined && typeof hard_code !== "string")
+    (hard_code !== undefined && typeof hard_code !== "string") ||
+    (theme !== undefined && typeof theme !== "string")
   ) {
     throw new Error("Invalid hero event");
   }
@@ -58,11 +59,17 @@ function parseEvent(source: string) {
     title: title.trim(),
     body: subtitle.trim(),
     applicationLink: applicationLinks.get(hard_code ?? ""),
+    theme,
   };
 }
 
 const readRemoteEvent = createRemoteAsset(assetUrl, parseEvent);
 let localEvent: Promise<ReturnType<typeof parseEvent> | undefined> | undefined;
+
+export async function getHeroTheme() {
+  const source = await readFile(join(process.cwd(), "EVENTS.yml"), "utf8");
+  return parseEvent(source).theme ?? "";
+}
 
 export async function getLatestEvent() {
   const event = await readRemoteEvent();

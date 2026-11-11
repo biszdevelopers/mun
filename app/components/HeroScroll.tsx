@@ -9,12 +9,11 @@ import styles from "../page.module.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-function CTATheme() {
+function CTATheme({ theme }: { theme: string }) {
   return (
     <div className={styles.ctaTheme}>
       <h2 className={styles.ctaThemeTitle}>
-        A world of differences.<br />
-        A future we share.
+        {theme}
       </h2>
       <p className={styles.ctaThemeDescription}>
         Jayden lee is gay
@@ -23,7 +22,7 @@ function CTATheme() {
   );
 }
 
-export default function HeroScroll({ children }: { children: ReactNode }) {
+export default function HeroScroll({ children, theme }: { children: ReactNode; theme: string }) {
   const scene = useRef<HTMLElement>(null);
   const panel = useRef<HTMLDivElement>(null);
 
@@ -52,7 +51,7 @@ export default function HeroScroll({ children }: { children: ReactNode }) {
         {children}
         <div ref={panel} className={styles.primaryPanel}>
           
-          <CTATheme />
+          <CTATheme theme={theme} />
 
         </div>
       </div>

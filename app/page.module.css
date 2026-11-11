@@ -37,6 +37,7 @@
 }
 
 .ctaThemeTitle {
+  white-space: pre-line;
   margin: 1.5rem 0;
   font-size: clamp(2rem, 5.5vw, 5.5rem);
   font-weight: 600;
