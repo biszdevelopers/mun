@@ -2,7 +2,7 @@ import "server-only";
 
 import { fetch } from "undici";
 
-const checkInterval = 30_000;
+const checkInterval = 300_000;
 const requestTimeout = 3_000;
 
 export function createRemoteAsset<T>(url: string, parse: (source: string) => T) {
