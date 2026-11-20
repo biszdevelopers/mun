@@ -1,3 +1,4 @@
+import { sitePath } from "./site-path";
 import sectionThree from "../content/section-3.json";
 
 async function loadFirstAvailable(sources: string[]): Promise<string | undefined> {
@@ -5,14 +6,14 @@ async function loadFirstAvailable(sources: string[]): Promise<string | undefined
     const image = new Image();
     let timeout: ReturnType<typeof setTimeout> | undefined;
     try {
-      image.src = source;
+      image.src = sitePath(source);
       await Promise.race([
         image.decode(),
         new Promise<never>((_, reject) => {
           timeout = setTimeout(() => reject(new Error("Image timed out")), 6000);
         }),
       ]);
-      return source;
+      return sitePath(source);
     } catch {
       image.src = "";
       // Try the next source after a network error, decode error, or timeout.

@@ -253,7 +253,7 @@
   justify-content: center;
   padding: clamp(1.5rem, 6vw, 6rem);
   text-align: center;
-  background: url("/un-emblem-outline.svg") center / min(82vw, 68dvh, 40rem) auto no-repeat;
+  background: url("../public/un-emblem-outline.svg") center / min(82vw, 68dvh, 40rem) auto no-repeat;
 }
 
 .ctaThemeLabel {

@@ -1,5 +1,7 @@
 "use client";
 
+import { sitePath } from "../lib/site-path";
+
 import { useEffect, useState } from "react";
 
 import { loadSectionImages } from "../lib/section-images";
@@ -14,7 +16,7 @@ export default function HomeLoadingOverlay() {
     let active = true;
 
     const bill = new Image();
-    bill.src = "/images/hundred-dollar-bill-2025.webp";
+    bill.src = sitePath("/images/hundred-dollar-bill-2025.webp");
     const gem = document.querySelector<HTMLCanvasElement>('[data-home-gem="amethyst"]');
     // Include shader compilation and the actual gem's first frame in the loader.
     void Promise.allSettled([

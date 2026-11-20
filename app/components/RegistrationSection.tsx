@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/site-path";
 import { Button } from "./ui/button";
 import styles from "./RegistrationSection.module.css";
 
@@ -11,7 +12,7 @@ export default function RegistrationSection() {
           BISZMUN 2027 and find the information you need to register.
         </p>
         <Button asChild className="mt-6">
-          <a href="/registration">Registration details</a>
+          <a href={sitePath("/registration")}>Registration details</a>
         </Button>
       </div>
     </section>
