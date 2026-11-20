@@ -34,9 +34,31 @@
 
 .emoji {
   position: absolute;
-  width: clamp(7rem, 16vw, 14rem);
+  width: clamp(calc(7rem * var(--emoji-scale)), calc(16vw * var(--emoji-scale)), calc(14rem * var(--emoji-scale)));
   aspect-ratio: 1;
-  translate: -50% -50%;
+  transform: translate(-50%, -50%) rotate(var(--emoji-tilt));
+}
+
+.emojiReaction,
+.emojiIdle,
+.emojiWobble {
+  width: 100%;
+  height: 100%;
+}
+
+.emojiWobble {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 20%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.emojiWobble:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 6px;
 }
 
 .emoji img {
@@ -46,55 +68,101 @@
   object-fit: contain;
 }
 
-.emoji:nth-child(1) {
-  top: 18%;
-  left: 17%;
-  rotate: -10deg;
+.bill {
+  width: clamp(21rem, 33vw, 39rem);
+  aspect-ratio: 600 / 248;
 }
 
-.emoji:nth-child(2) {
-  top: 81%;
-  left: 82%;
-  rotate: 9deg;
+.bill .emojiWobble {
+  border-radius: 2%;
 }
 
-.emoji:nth-child(3) {
-  top: 20%;
-  left: 79%;
-  width: clamp(3.5rem, 6.5vw, 6rem);
-  rotate: 12deg;
+.bill img {
+  border-radius: 2px;
+  filter: drop-shadow(0 7px 9px rgb(25 40 25 / 16%));
 }
 
-.emoji:nth-child(4) {
-  top: 80%;
-  left: 23%;
-  width: clamp(2.75rem, 5vw, 4.5rem);
-  rotate: -8deg;
+@media (width < 80rem) {
+  .sideEmoji {
+    --emoji-top: 25%;
+  }
+
+  .bill {
+    --emoji-top: 25%;
+  }
+}
+
+.rubyGem {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rubyCanvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  filter: drop-shadow(0 5px 5px rgb(45 15 65 / 12%));
+}
+
+.rubyFallback {
+  position: absolute;
+  inset: 20% 10%;
+  background: conic-gradient(from 25deg, #eadcfb, var(--gem-color, #a6001a), #553464, var(--gem-color, #a6001a), #eadcfb);
+  clip-path: polygon(22% 0, 78% 0, 100% 22%, 100% 78%, 78% 100%, 22% 100%, 0 78%, 0 22%);
+}
+
+.rubyGem[data-ready="true"] .rubyCanvas {
+  opacity: 1;
+}
+
+.rubyGem[data-ready="true"] .rubyFallback {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Separate elements let idle motion and scroll parallax compose freely. */
+  .emojiIdle {
+    animation:
+      float var(--float-duration) ease-in-out var(--idle-delay) infinite alternate,
+      rock var(--rock-duration) ease-in-out var(--idle-delay) infinite alternate;
+    animation-play-state: paused;
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translate3d(-3px, calc(-1 * var(--float-distance)), 0);
+  }
+
+  to {
+    transform: translate3d(3px, var(--float-distance), 0);
+  }
+}
+
+@keyframes rock {
+  from {
+    rotate: calc(-1 * var(--rock-angle));
+  }
+
+  to {
+    rotate: var(--rock-angle);
+  }
 }
 
 @media (width < 48rem) {
   .emoji {
-    width: clamp(4rem, 23vw, 6.5rem);
+    width: clamp(calc(4rem * var(--emoji-scale)), calc(23vw * var(--emoji-scale)), calc(6.5rem * var(--emoji-scale)));
   }
 
-  .emoji:nth-child(1) {
-    top: 16%;
-    left: 19%;
-  }
-
-  .emoji:nth-child(2) {
-    top: 83%;
-    left: 80%;
-  }
-
-  .emoji:nth-child(3) {
-    top: 18%;
-    width: clamp(2.5rem, 12vw, 3.5rem);
-  }
-
-  .emoji:nth-child(4) {
-    top: 82%;
-    width: clamp(2rem, 10vw, 3rem);
+  .bill {
+    width: clamp(12rem, 48vw, 18rem);
+    --emoji-top: 25%;
   }
 }
 

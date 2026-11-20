@@ -125,8 +125,10 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
         navigation.style.setProperty("--theme-clip-top", `${whiteTop}px`);
         if (committeesPanel.current) {
           const bounds = committeesPanel.current.getBoundingClientRect();
+          const firstCommittee = aboutSection.current.parentElement?.querySelector("[data-committee-section]");
+          const blueBottom = Math.min(bounds.bottom, firstCommittee?.getBoundingClientRect().top ?? bounds.bottom);
           const clipTop = Math.max(0, Math.min(navigationBounds.height, bounds.top - navigationBounds.top));
-          const clipBottom = Math.max(0, Math.min(navigationBounds.height, bounds.bottom - navigationBounds.top));
+          const clipBottom = Math.max(0, Math.min(navigationBounds.height, blueBottom - navigationBounds.top));
           navigation.style.setProperty("--committees-clip-top", `${clipTop}px`);
           navigation.style.setProperty("--committees-clip-bottom", `${navigationBounds.height - clipBottom}px`);
         }
@@ -163,6 +165,7 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
       onRefresh: syncNavigation,
     });
     syncNavigation();
+    window.addEventListener("scroll", syncNavigation, { passive: true });
     smallScreen.addEventListener("change", syncNavigation);
 
     media.add("(prefers-reduced-motion: no-preference)", () => {
@@ -222,6 +225,7 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
     });
 
     return () => {
+      window.removeEventListener("scroll", syncNavigation);
       smallScreen.removeEventListener("change", syncNavigation);
       if (previousEdgeBackground) root.style.setProperty("--page-edge-background", previousEdgeBackground);
       else root.style.removeProperty("--page-edge-background");

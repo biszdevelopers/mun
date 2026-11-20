@@ -3,18 +3,26 @@
 import { useEffect, useState } from "react";
 
 import { loadSectionImages } from "../lib/section-images";
+import { amethyst, preloadGem } from "../lib/gem-renderer";
 import styles from "../page.module.css";
 import LoadingOverlay from "./LoadingOverlay";
 
 export default function HomeLoadingOverlay() {
-  const [imagesReady, setImagesReady] = useState(false);
+  const [assetsReady, setAssetsReady] = useState(false);
 
   useEffect(() => {
     let active = true;
 
-    // Wait for each image's first working source, including hidden mobile tiles.
-    void loadSectionImages().then(() => {
-      if (active) setImagesReady(true);
+    const bill = new Image();
+    bill.src = "/images/hundred-dollar-bill-2025.webp";
+    const gem = document.querySelector<HTMLCanvasElement>('[data-home-gem="amethyst"]');
+    // Include shader compilation and the actual gem's first frame in the loader.
+    void Promise.allSettled([
+      loadSectionImages(),
+      bill.decode(),
+      gem ? preloadGem(gem, amethyst) : Promise.resolve(),
+    ]).then(() => {
+      if (active) setAssetsReady(true);
     });
 
     return () => {
@@ -24,7 +32,7 @@ export default function HomeLoadingOverlay() {
 
   return (
     <LoadingOverlay
-      className={`${styles.loading}${imagesReady ? ` ${styles.imagesReady}` : ""}`}
+      className={`${styles.loading}${assetsReady ? ` ${styles.imagesReady}` : ""}`}
     />
   );
 }
