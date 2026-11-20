@@ -1,4 +1,3 @@
-import { sitePath } from "../lib/site-path";
 import styles from "./BottomBar.module.css";
 import FooterMenu from "./FooterMenu";
 
@@ -50,7 +49,7 @@ export default function BottomBar() {
           <p>© 2027 BISZMUN. All rights reserved.</p>
           <p>This event is affiliated and sponsored by <a className="text-white" href="https://bisz.basischina.com/" target="_blank">Basis International School Shenzhen</a>.</p>
           <p>Website content and conference materials are provided for BISZMUN participants. Third-party names, logos, and materials belong to their respective owners.</p>
-          <p className="text-gray-300">Made with ❤️ by the <a className="text-white" href={sitePath("/about")} target="_blank">BISZMUN Team</a></p>
+          <p className="text-gray-300">Made with ❤️ by the <a className="text-white" href="/about" target="_blank">BISZMUN Team</a></p>
         </div>
       </div>
     </footer>

@@ -37,19 +37,19 @@ export default function Home() {
 }
 
 async function HomeTheme() {
-  if (process.env.GITHUB_PAGES !== "true") await connection();
+  await connection();
   return getHeroTheme();
 }
 
 async function HomeThemeDescription() {
-  if (process.env.GITHUB_PAGES !== "true") await connection();
+  await connection();
   return getHeroThemeDescription();
 }
 
 async function HomeContent() {
 
   // sec 1
-  if (process.env.GITHUB_PAGES !== "true") await connection();
+  await connection();
   const event = await getLatestEvent();
 
   return (

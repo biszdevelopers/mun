@@ -13,5 +13,5 @@
 .monochromeLogo {
   aspect-ratio: 1402 / 1122;
   background-color: currentColor;
-  mask: url("../../public/logo.svg") center / contain no-repeat;
+  mask: url("/logo.svg") center / contain no-repeat;
 }

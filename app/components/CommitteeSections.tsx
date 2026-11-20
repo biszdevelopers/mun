@@ -1,7 +1,5 @@
 "use client";
 
-import { sitePath } from "../lib/site-path";
-
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -351,7 +349,7 @@ function CommitteeSection({ committee }: { committee: (typeof committees)[number
                     aria-label={emoji === "amethyst" ? "Animate Asscher-cut amethyst" : emoji === "hundred-dollar-bill" ? "Wiggle 100 dollar bill with Benjamin Franklin" : `Animate ${emoji.replaceAll("-", " ")} emoji`}
                   >
                     {emoji === "amethyst" ? <Gemstone spec={amethyst} label="Asscher-cut amethyst" id="amethyst" /> : <Image
-                      src={sitePath(emoji === "hundred-dollar-bill" ? "/images/hundred-dollar-bill-2025.webp" : `/emoji/apple/${emoji}.png`)}
+                      src={emoji === "hundred-dollar-bill" ? "/images/hundred-dollar-bill-2025.webp" : `/emoji/apple/${emoji}.png`}
                       alt=""
                       width={emoji === "hundred-dollar-bill" ? 600 : 160}
                       height={emoji === "hundred-dollar-bill" ? 248 : 160}

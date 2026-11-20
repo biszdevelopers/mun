@@ -1,7 +1,5 @@
 "use client";
 
-import { sitePath } from "../lib/site-path";
-
 import { useId } from "react";
 import { ExternalLink } from "lucide-react";
 
@@ -22,7 +20,7 @@ export default function FooterMenu({ title, links }: FooterMenuProps) {
         {links.map(({ label, href, external }) => (
           <li key={label}>
             <a
-              href={sitePath(href)}
+              href={href}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
               onClick={(event) => { if (!href) event.preventDefault(); }}

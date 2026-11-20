@@ -1,7 +1,5 @@
 "use client";
 
-import { sitePath } from "../lib/site-path";
-
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,7 +40,7 @@ function CTATheme({ theme, theme_description }: { theme: ReactNode; theme_descri
         {theme_description}
       </p>
       <Button asChild className="mt-6 bg-white text-primary hover:bg-white/90 focus-visible:outline-white">
-        <a href={sitePath("/theme")}>See theme details</a>
+        <a href="/theme">See theme details</a>
       </Button>
     </div>
   );
@@ -270,7 +268,7 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
           <h2 id="about-us-title">{sectionThree.title}</h2>
           <p>{sectionThree.description}</p>
           <Button asChild className="mt-6 bg-black text-white hover:bg-black/90 focus-visible:outline-black">
-            <a href={sitePath("/about")}>More About Us</a>
+            <a href="/about">More About Us</a>
           </Button>
         </div>
         <div ref={collage} className={styles.collage} aria-hidden="true">
