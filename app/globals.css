@@ -66,6 +66,11 @@
 
 :root:has([data-page-theme="light"]) {
   color-scheme: light;
+  background-color: var(--page-edge-background, var(--color-muted));
+}
+
+body:has([data-page-theme="light"]) {
+  background-color: var(--page-edge-background, var(--color-muted));
 }
 
 @layer base {
@@ -121,6 +126,12 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has([data-page-theme="light"]) {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

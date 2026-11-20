@@ -5,7 +5,9 @@ import { Suspense } from "react";
 
 import LatestAlert from "./components/LatestAlert";
 import HeroScroll from "./components/HeroScroll";
-import LoadingOverlay, { Globe } from "./components/LoadingOverlay";
+import HomeNavigation from "./components/HomeNavigation";
+import { Globe } from "./components/LoadingOverlay";
+import HomeLoadingOverlay from "./components/HomeLoadingOverlay";
 import { Button } from "./components/ui/button";
 import { getHeroTheme, getHeroThemeDescription, getLatestEvent } from "./lib/events";
 import styles from "./page.module.css";
@@ -17,18 +19,20 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <HeroScroll theme={<Suspense fallback={null}><HomeTheme /></Suspense>} theme_description={<Suspense fallback={null}><HomeThemeDescription /></Suspense>}>
-      <section className={styles.hero}>
-        <LoadingOverlay className={styles.loading} />
-        <Suspense fallback={null}>
-          <HomeContent />
-        </Suspense>
-        <div className={styles.scrollCue}>
-          <span>Scroll for more</span>
-          <ArrowDown aria-hidden="true" size={20} strokeWidth={1.5} />
-        </div>
-      </section>
-    </HeroScroll>
+    <>
+      <HomeLoadingOverlay />
+      <HeroScroll theme={<Suspense fallback={null}><HomeTheme /></Suspense>} theme_description={<Suspense fallback={null}><HomeThemeDescription /></Suspense>}>
+        <section className={styles.hero}>
+          <Suspense fallback={null}>
+            <HomeContent />
+          </Suspense>
+          <div className={styles.scrollCue}>
+            <span>Scroll for more</span>
+            <ArrowDown aria-hidden="true" size={20} strokeWidth={1.5} />
+          </div>
+        </section>
+      </HeroScroll>
+    </>
   );
 }
 
@@ -51,7 +55,9 @@ async function HomeContent() {
   return (
     <>
       <Globe className={styles.globe} />
-      <div className={styles.bookmark} />
+      <nav className={styles.bookmark} aria-label="Main navigation">
+        <HomeNavigation />
+      </nav>
       {event && (
         <LatestAlert
           className={styles.alert}

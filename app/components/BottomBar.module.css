@@ -1,0 +1,86 @@
+.bottomBar {
+  --footer-padding: clamp(1rem, 2vw, 3rem);
+  min-height: 100dvh;
+  padding: var(--footer-padding);
+  background-color: var(--color-primary);
+  color: white;
+  overflow-x: auto;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  display: block;
+  width: clamp(8rem, 12vw, 14rem);
+  aspect-ratio: 512 / 436;
+  background-color: currentColor;
+  mask: url("/logo_un.svg") center / contain no-repeat;
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.mun {
+  color: var(--color-un);
+}
+
+.year {
+  margin-top: 0.25rem;
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  line-height: 1.15;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  gap: 3vw;
+  row-gap: 1.5rem;
+  width: max-content;
+  margin-inline: auto;
+  margin-top: 3rem;
+}
+
+.column {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.copyright {
+  grid-column: 1 / -1;
+  min-width: 0;
+  contain: inline-size;
+  padding-inline: calc(clamp(0.75rem, 1.05vw, 1.125rem) * 0.85);
+  color: white;
+}
+
+.copyright p {
+  margin: 0;
+  font-family: var(--font-noto-serif, Georgia), serif;
+  font-size: clamp(0.75rem, 0.8vw, 0.875rem);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.copyright p + p {
+  margin-top: 0.5em;
+}
+
+@media (width < 64rem) {
+  .columns {
+    width: calc(100% + var(--footer-padding) * 2);
+    min-width: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-inline: calc(var(--footer-padding) * -1);
+  }
+}

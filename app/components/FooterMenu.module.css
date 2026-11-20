@@ -1,0 +1,60 @@
+.menu {
+  --link-font-size: clamp(0.75rem, 1.05vw, 1.125rem);
+  --link-inline-padding: calc(var(--link-font-size) * 0.85);
+  color: white;
+}
+
+.title {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0.75rem;
+  margin-left: var(--link-inline-padding);
+  padding-bottom: 0.35em;
+  border-bottom: 3px solid var(--color-un);
+  font-family: var(--font-noto-serif, Georgia), serif;
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--link-font-size);
+  line-height: 1.5;
+}
+
+.links a {
+  display: block;
+  white-space: nowrap;
+  padding: 0.5em var(--link-inline-padding);
+  color: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.externalIcon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.35em;
+  vertical-align: -0.125em;
+}
+
+.links a:hover,
+.links a:focus-visible {
+  background-color: var(--color-un);
+}
+
+@media (width < 64rem) {
+  .links a {
+    white-space: normal;
+  }
+
+  .title {
+    max-width: calc(100% - var(--link-inline-padding));
+  }
+}

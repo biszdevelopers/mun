@@ -4,6 +4,15 @@
   min-height: 250dvh;
 }
 
+.themeAnchor {
+  position: absolute;
+  top: 100dvh;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
 .scrollStage {
   position: sticky;
   top: 0;
@@ -94,6 +103,9 @@
 .collageTile {
   position: absolute;
   background-color: var(--color-primary-100);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -159,7 +171,6 @@
   .sectionThreeCopy h2 {
     font-size: clamp(2.5rem, 9vw, 4.5rem);
     font-weight: 900;
-    text-transform: uppercase;
     -webkit-text-stroke: 0.06em black;
     paint-order: stroke fill;
   }
@@ -192,49 +203,45 @@
     content: "";
     background:
       linear-gradient(to right,
-        transparent 33%, white 33% 34.5%,
-        transparent 34.5% 66%, white 66% 67.5%, transparent 67.5%);
+        transparent 49.25%, white 49.25% 50.75%, transparent 50.75%);
     pointer-events: none;
   }
 
-  .collageTile {
-    inset: 0;
-  }
-
   .topLeft {
-    clip-path: polygon(0 0, 33% 0, 33% 32%, 0 27%);
+    inset: 0 50.75% 68% 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 84.375%);
   }
 
   .topMiddle {
-    clip-path: polygon(34.5% 0, 66% 0, 66% 29%, 34.5% 32%);
+    /* Stagger column seams so the gutters end in independent T-junctions. */
+    inset: 0 0 76% 50.75%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 91.667%);
   }
 
-  .topRight {
-    clip-path: polygon(67.5% 0, 100% 0, 100% 34%, 67.5% 29%);
+  .topRight,
+  .middleRight,
+  .bottomRight {
+    display: none;
   }
 
   .middleLeft {
-    clip-path: polygon(0 28%, 33% 33%, 33% 65%, 0 70%);
+    inset: 28% 50.75% 30% 0;
+    clip-path: polygon(0 0, 100% 11.905%, 100% 88.095%, 0 100%);
   }
 
   .middleCenter {
-    clip-path: polygon(34.5% 33%, 66% 30%, 66% 68%, 34.5% 65%);
-  }
-
-  .middleRight {
-    clip-path: polygon(67.5% 30%, 100% 35%, 100% 63%, 67.5% 68%);
+    inset: 23% 0 24% 50.75%;
+    clip-path: polygon(0 0, 100% 3.774%, 100% 100%, 0 94.34%);
   }
 
   .bottomLeft {
-    clip-path: polygon(0 71%, 33% 66%, 33% 100%, 0 100%);
+    inset: 66% 50.75% 0 0;
+    clip-path: polygon(0 14.706%, 100% 0, 100% 100%, 0 100%);
   }
 
   .bottomCenter {
-    clip-path: polygon(34.5% 66%, 66% 69%, 66% 100%, 34.5% 100%);
-  }
-
-  .bottomRight {
-    clip-path: polygon(67.5% 69%, 100% 64%, 100% 100%, 67.5% 100%);
+    inset: 74% 0 0 50.75%;
+    clip-path: polygon(0 0, 100% 11.538%, 100% 100%, 0 100%);
   }
 }
 
@@ -285,6 +292,7 @@
 .hero {
   position: relative;
   isolation: isolate;
+  background-color: var(--color-muted);
   display: grid;
   grid-template-columns: 8.5% 15% 1fr;
   height: 100dvh;
@@ -296,7 +304,7 @@
   transition: opacity 300ms ease-out, visibility 300ms;
 }
 
-.hero:has(> .heading) > .loading {
+.loading.imagesReady:has(~ main .heading) {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -326,6 +334,159 @@
 .bookmark {
   grid-area: 1 / 2;
   background: var(--color-primary-700);
+  color: white;
+  padding: 6dvh 0 0;
+}
+
+.bookmarkItems {
+  display: flex;
+  flex-direction: column;
+  margin: -0.5em 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(0.5rem, 1.05vw, 1.125rem);
+  line-height: 1.5;
+}
+
+.bookmarkItems > li {
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.bookmarkItems > li > a,
+.bookmarkItems > .bookmarkExternal {
+  padding: 0.5em 1.5vw 0.5em 2vw;
+}
+
+.bookmarkItems > li > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bookmarkItems > li:hover,
+.bookmarkItems > li:focus-within {
+  background-color: var(--color-un);
+}
+
+.bookmarkExternal {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.bookmarkExternal svg {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.bookmarkExternalIcon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.35em;
+  vertical-align: -0.125em;
+}
+
+.topNavigation {
+  position: fixed;
+  z-index: 20;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(1rem, 3dvh, 2rem));
+  right: max(3vw, env(safe-area-inset-right, 0px));
+  max-width: 94vw;
+  color: black;
+  background-color: transparent;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 500ms ease-out, visibility 500ms;
+}
+
+.topNavigationVisible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.topNavigationLight {
+  position: absolute;
+  inset: 0;
+  color: white;
+  pointer-events: none;
+  clip-path: inset(var(--theme-clip-top, 0px) 0 calc(100% - var(--theme-clip, 100%)) 0);
+}
+
+.topNavigationCommitteesLight {
+  position: absolute;
+  inset: 0;
+  color: white;
+  pointer-events: none;
+  clip-path: inset(var(--committees-clip-top, 100%) 0 var(--committees-clip-bottom, 0px) 0);
+}
+
+.topNavigation .bookmarkItems {
+  flex-direction: row;
+  margin: 0;
+  font-size: clamp(0.75rem, 1.05vw, 1.125rem);
+  white-space: nowrap;
+}
+
+.topNavigation .bookmarkItems > li > a,
+.topNavigation .bookmarkItems > .bookmarkExternal {
+  padding: 0.5em 0.85em;
+  flex-wrap: nowrap;
+}
+
+@media (width < 64rem) {
+  .bookmark .bookmarkItems {
+    display: none;
+  }
+
+  .topNavigation.topNavigation {
+    /* Reserve the blue ribbon plus breathing room on its right. */
+    left: calc(23.5vw + clamp(0.5rem, 3vw, 1.5rem));
+    max-width: none;
+    container-type: inline-size;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  .topNavigation .bookmarkItems {
+    justify-content: flex-end;
+    font-size: min(0.75rem, 4.2cqw);
+  }
+
+  .topNavigation .bookmarkItems > li > a,
+  .topNavigation .bookmarkItems > .bookmarkExternal {
+    padding-inline: 0.65em;
+  }
+}
+
+.topNavigation[data-footer-reached="true"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 300ms ease-out, visibility 300ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topNavigation.topNavigation {
+    transition: none;
+  }
+}
+
+@media (width < 48rem) {
+  .bookmarkItems > li > a,
+  .bookmarkItems > .bookmarkExternal {
+    padding-inline: 0.4rem;
+  }
+
+  .bookmarkExternal {
+    flex-wrap: wrap;
+  }
 }
 
 .alert {

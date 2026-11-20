@@ -1,0 +1,131 @@
+.scene {
+  position: relative;
+  min-height: 250dvh;
+  background-color: white;
+  color: black;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  min-height: 100dvh;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(2rem, 6vw, 6rem) clamp(1.5rem, 6vw, 6rem);
+  text-align: center;
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 72rem;
+}
+
+.emojiField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.emoji {
+  position: absolute;
+  width: clamp(7rem, 16vw, 14rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+
+.emoji img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.emoji:nth-child(1) {
+  top: 18%;
+  left: 17%;
+  rotate: -10deg;
+}
+
+.emoji:nth-child(2) {
+  top: 81%;
+  left: 82%;
+  rotate: 9deg;
+}
+
+.emoji:nth-child(3) {
+  top: 20%;
+  left: 79%;
+  width: clamp(3.5rem, 6.5vw, 6rem);
+  rotate: 12deg;
+}
+
+.emoji:nth-child(4) {
+  top: 80%;
+  left: 23%;
+  width: clamp(2.75rem, 5vw, 4.5rem);
+  rotate: -8deg;
+}
+
+@media (width < 48rem) {
+  .emoji {
+    width: clamp(4rem, 23vw, 6.5rem);
+  }
+
+  .emoji:nth-child(1) {
+    top: 16%;
+    left: 19%;
+  }
+
+  .emoji:nth-child(2) {
+    top: 83%;
+    left: 80%;
+  }
+
+  .emoji:nth-child(3) {
+    top: 18%;
+    width: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .emoji:nth-child(4) {
+    top: 82%;
+    width: clamp(2rem, 10vw, 3rem);
+  }
+}
+
+.label {
+  color: var(--color-primary);
+  font-size: var(--text-caption);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 1.5rem 0;
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.description {
+  margin: 0 auto;
+  max-width: 65ch;
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    min-height: 100dvh;
+  }
+
+  .stage {
+    position: relative;
+  }
+}

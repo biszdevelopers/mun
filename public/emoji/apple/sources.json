@@ -1,0 +1,72 @@
+{
+  "vendor": "Apple",
+  "source": "Emojipedia",
+  "images": [
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/globe-showing-europe-africa",
+      "image": "https://em-content.zobj.net/source/apple/419/globe-showing-europe-africa_1f30d.png",
+      "file": "globe-showing-europe-africa.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/handshake",
+      "image": "https://em-content.zobj.net/source/apple/419/handshake_1f91d.png",
+      "file": "handshake.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/speech-balloon",
+      "image": "https://em-content.zobj.net/source/apple/419/speech-balloon_1f4ac.png",
+      "file": "speech-balloon.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/balance-scale",
+      "image": "https://em-content.zobj.net/source/apple/419/balance-scale_2696-fe0f.png",
+      "file": "balance-scale.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/raised-fist",
+      "image": "https://em-content.zobj.net/source/apple/419/raised-fist_270a.png",
+      "file": "raised-fist.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/scroll",
+      "image": "https://em-content.zobj.net/source/apple/419/scroll_1f4dc.png",
+      "file": "scroll.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/seedling",
+      "image": "https://em-content.zobj.net/source/apple/419/seedling_1f331.png",
+      "file": "seedling.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/chart-increasing",
+      "image": "https://em-content.zobj.net/source/apple/419/chart-increasing_1f4c8.png",
+      "file": "chart-increasing.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/money-bag",
+      "image": "https://em-content.zobj.net/source/apple/419/money-bag_1f4b0.png",
+      "file": "money-bag.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/dove",
+      "image": "https://em-content.zobj.net/source/apple/419/dove_1f54a-fe0f.png",
+      "file": "dove.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/shield",
+      "image": "https://em-content.zobj.net/source/apple/419/shield_1f6e1-fe0f.png",
+      "file": "shield.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/peace-symbol",
+      "image": "https://em-content.zobj.net/source/apple/419/peace-symbol_262e-fe0f.png",
+      "file": "peace-symbol.png"
+    },
+    {
+      "page": "https://emojipedia.org/apple/ios-18.4/classical-building",
+      "image": "https://em-content.zobj.net/source/apple/419/classical-building_1f3db-fe0f.png",
+      "file": "classical-building.png"
+    }
+  ],
+  "version": "iOS 18.4"
+}

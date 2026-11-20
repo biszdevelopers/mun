@@ -1,0 +1,17 @@
+.coloredLogo,
+.monochromeLogo {
+  display: inline-block;
+  width: 10rem;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.coloredLogo {
+  height: auto;
+}
+
+.monochromeLogo {
+  aspect-ratio: 1402 / 1122;
+  background-color: currentColor;
+  mask: url("/logo.svg") center / contain no-repeat;
+}
