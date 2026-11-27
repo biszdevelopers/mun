@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import type { ReactNode } from "react";
 
 import "./globals.css";
 import ThemeProvider from "./components/ThemeProvider";
+import NavigationLoadingBar from "./components/NavigationLoadingBar";
 
 const geologica = localFont({
   src: [
@@ -47,6 +49,9 @@ export default function RootLayout({
       className={`${geologica.className} ${notoSerif.variable}`}
     >
       <body>
+        <Suspense fallback={null}>
+          <NavigationLoadingBar />
+        </Suspense>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

@@ -19,3 +19,27 @@
   max-width: 36rem;
   margin: 0;
 }
+
+.committees {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.committee {
+  padding: 20px 24px;
+  border: 1px solid var(--page-border);
+  border-radius: 6px;
+}
+
+.committee h3 {
+  margin: 0 0 12px;
+}
+
+.committee ol {
+  margin: 0;
+}
+
+.committee li:last-child {
+  margin-bottom: 0;
+}
