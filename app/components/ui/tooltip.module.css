@@ -11,8 +11,31 @@
   transform-origin: var(--radix-tooltip-content-transform-origin);
   animation: appear 120ms ease-out;
 }
-.content[data-state="closed"] { animation: disappear 120ms ease-in; }
-.arrow { fill: var(--color-primary-950); }
-@keyframes appear { from { opacity: 0; } to { opacity: 1; } }
-@keyframes disappear { from { opacity: 1; } to { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .content, .content[data-state="closed"] { animation: none; } }
+.content[data-state="closed"] {
+  animation: disappear 120ms ease-in;
+}
+.arrow {
+  fill: var(--color-primary-950);
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .content,
+  .content[data-state="closed"] {
+    animation: none;
+  }
+}

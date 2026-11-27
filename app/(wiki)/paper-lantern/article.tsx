@@ -20,8 +20,9 @@ export default function Article() {
       <h2>Create a new page</h2>
       <p>
         Add <code>app/(wiki)/theme/security-council/page.tsx</code> to create{" "}
-        <code>/theme/security-council</code>. Keep the content and exported articleMetadata in a sibling article.tsx
-        file, and import them from the route entry.
+        <code>/theme/security-council</code>. Keep the content and exported
+        articleMetadata in a sibling article.tsx file, and import them from the
+        route entry.
       </p>
       <pre>
         <code>{`export const articleMetadata = {

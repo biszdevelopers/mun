@@ -23,7 +23,9 @@ export default function BottomBar() {
             <FooterMenu title={title} links={links} />
           </div>
         ))}
-        <div className={styles.appearance}><ThemeSelect /></div>
+        <div className={styles.appearance}>
+          <ThemeSelect />
+        </div>
         <div className={styles.copyright}>
           <p>© 2027 BISZMUN. All rights reserved.</p>
           <p>

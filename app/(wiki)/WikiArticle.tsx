@@ -14,7 +14,10 @@ export type ArticleMetadata = {
   category: ArticleCategory;
 };
 
-export default function WikiArticle({ metadata, children }: {
+export default function WikiArticle({
+  metadata,
+  children,
+}: {
   metadata: ArticleMetadata;
   children: ReactNode;
 }) {
@@ -30,7 +33,14 @@ export default function WikiArticle({ metadata, children }: {
       <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
         <ol>
           {categories.map((item, index) => (
-            <li key={`${index}-${item.link}`}>{item.link ? <Link href={item.link}>{item.title}</Link> : item.title}<span aria-hidden="true">/</span></li>
+            <li key={`${index}-${item.link}`}>
+              {item.link ? (
+                <Link href={item.link}>{item.title}</Link>
+              ) : (
+                item.title
+              )}
+              <span aria-hidden="true">/</span>
+            </li>
           ))}
           <li aria-current="page">{metadata.title}</li>
         </ol>

@@ -355,8 +355,20 @@
   padding: 0;
   row-gap: 8px;
 }
-.breadcrumb li { display: inline-flex; align-items: center; }
-.breadcrumb a:hover { color: var(--page-accent); text-decoration: underline; }
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+.breadcrumb a:hover {
+  color: var(--page-accent);
+  text-decoration: underline;
+}
 
-.breadcrumb { display: flex; align-items: center; gap: 8px; }
-.breadcrumb ol { min-width: 0; }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.breadcrumb ol {
+  min-width: 0;
+}

@@ -40,8 +40,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${geologica.className} ${notoSerif.variable}`}>
-      <body><ThemeProvider>{children}</ThemeProvider></body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geologica.className} ${notoSerif.variable}`}
+    >
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

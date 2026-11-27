@@ -23,80 +23,80 @@ export default function WikiTopbar() {
   return (
     <header ref={headerRef} className={styles.header}>
       <div className={`${layoutStyles.grid} ${styles.headerContent}`}>
-      <Link href="/" className={styles.logoLink} aria-label="BISZMUN home">
-        <Logo className={styles.logo} />
-      </Link>
-      <nav aria-label="Main navigation" className={styles.navigation}>
-        <ul className={styles.items}>
-          {footerNavigation.map(({ title, links }) => (
-            <li
-              key={title}
-              className={styles.group}
-              onMouseEnter={() => setOpen(title)}
-              onMouseLeave={() => setOpen(null)}
-              onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget))
-                  setOpen(null);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Escape") {
-                  setOpen(null);
-                  event.currentTarget.querySelector("button")?.focus();
-                }
-              }}
-            >
-              <button
-                type="button"
-                className={styles.trigger}
-                aria-expanded={open === title}
-                aria-controls={`wiki-nav-${title.toLowerCase()}`}
-                onClick={() => setOpen(open === title ? null : title)}
+        <Link href="/" className={styles.logoLink} aria-label="BISZMUN home">
+          <Logo className={styles.logo} />
+        </Link>
+        <nav aria-label="Main navigation" className={styles.navigation}>
+          <ul className={styles.items}>
+            {footerNavigation.map(({ title, links }) => (
+              <li
+                key={title}
+                className={styles.group}
+                onMouseEnter={() => setOpen(title)}
+                onMouseLeave={() => setOpen(null)}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget))
+                    setOpen(null);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    setOpen(null);
+                    event.currentTarget.querySelector("button")?.focus();
+                  }
+                }}
               >
-                {title}
-                <ChevronDown size={12} aria-hidden="true" />
-              </button>
-              <ul
-                id={`wiki-nav-${title.toLowerCase()}`}
-                className={styles.dropdown}
-                data-open={open === title}
-                aria-hidden={open !== title}
-                inert={open !== title}
+                <button
+                  type="button"
+                  className={styles.trigger}
+                  aria-expanded={open === title}
+                  aria-controls={`wiki-nav-${title.toLowerCase()}`}
+                  onClick={() => setOpen(open === title ? null : title)}
+                >
+                  {title}
+                  <ChevronDown size={12} aria-hidden="true" />
+                </button>
+                <ul
+                  id={`wiki-nav-${title.toLowerCase()}`}
+                  className={styles.dropdown}
+                  data-open={open === title}
+                  aria-hidden={open !== title}
+                  inert={open !== title}
+                >
+                  {links.map(({ label, href, external }) => (
+                    <li key={label}>
+                      {href ? (
+                        <Link
+                          href={href}
+                          target={external ? "_blank" : undefined}
+                          rel={external ? "noopener noreferrer" : undefined}
+                          onClick={() => setOpen(null)}
+                        >
+                          {label}
+                          {external && (
+                            <ExternalLink size={12} aria-hidden="true" />
+                          )}
+                        </Link>
+                      ) : (
+                        <span aria-disabled="true">{label}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+            <li>
+              <a
+                className={styles.external}
+                href="https://my.biszmun.org"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {links.map(({ label, href, external }) => (
-                  <li key={label}>
-                    {href ? (
-                      <Link
-                        href={href}
-                        target={external ? "_blank" : undefined}
-                        rel={external ? "noopener noreferrer" : undefined}
-                        onClick={() => setOpen(null)}
-                      >
-                        {label}
-                        {external && (
-                          <ExternalLink size={12} aria-hidden="true" />
-                        )}
-                      </Link>
-                    ) : (
-                      <span aria-disabled="true">{label}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
+                My BISZMUN
+                <ExternalLink size={13} aria-hidden="true" />
+              </a>
             </li>
-          ))}
-          <li>
-            <a
-              className={styles.external}
-              href="https://my.biszmun.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              My BISZMUN
-              <ExternalLink size={13} aria-hidden="true" />
-            </a>
-          </li>
-        </ul>
-      </nav>
+          </ul>
+        </nav>
       </div>
     </header>
   );

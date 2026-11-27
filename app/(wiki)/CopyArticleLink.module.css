@@ -14,11 +14,34 @@
   cursor: pointer;
   transition: color 150ms ease;
 }
-.button:hover { color: var(--page-accent); }
-.button:focus-visible { outline: 2px solid var(--color-un); outline-offset: 3px; }
-.button svg { position: absolute; width: 16px; height: 16px; transition: opacity 150ms ease; }
-.link { opacity: 1; }
-.check { opacity: 0; }
-.button[data-copied="true"] .link { opacity: 0; }
-.button[data-copied="true"] .check { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .button, .button svg { transition: none; } }
+.button:hover {
+  color: var(--page-accent);
+}
+.button:focus-visible {
+  outline: 2px solid var(--color-un);
+  outline-offset: 3px;
+}
+.button svg {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transition: opacity 150ms ease;
+}
+.link {
+  opacity: 1;
+}
+.check {
+  opacity: 0;
+}
+.button[data-copied="true"] .link {
+  opacity: 0;
+}
+.button[data-copied="true"] .check {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button svg {
+    transition: none;
+  }
+}

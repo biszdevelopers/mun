@@ -2,7 +2,13 @@
 
 import { useEffect, useId, useState } from "react";
 import { useTheme } from "next-themes";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import styles from "./ThemeSelect.module.css";
 
 export default function ThemeSelect() {
@@ -14,8 +20,14 @@ export default function ThemeSelect() {
   return (
     <div className={styles.field}>
       <span id={labelId}>Appearance</span>
-      <Select value={mounted ? theme : "system"} onValueChange={setTheme} disabled={!mounted}>
-        <SelectTrigger aria-labelledby={labelId}><SelectValue /></SelectTrigger>
+      <Select
+        value={mounted ? theme : "system"}
+        onValueChange={setTheme}
+        disabled={!mounted}
+      >
+        <SelectTrigger aria-labelledby={labelId}>
+          <SelectValue />
+        </SelectTrigger>
         <SelectContent side="top" align="end">
           <SelectItem value="system">System</SelectItem>
           <SelectItem value="light">Light</SelectItem>

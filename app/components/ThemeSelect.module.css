@@ -1,1 +1,7 @@
-.field { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-size: var(--text-caption); }
+.field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: var(--text-caption);
+}

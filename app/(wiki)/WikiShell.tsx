@@ -7,11 +7,7 @@ import WikiTopbar from "./WikiTopbar";
 
 type Heading = { id: string; title: string; level: number };
 
-export default function WikiShell({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function WikiShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState("Wiki");
@@ -22,7 +18,12 @@ export default function WikiShell({
     if (!content) return;
     function updateOutline() {
       if (!content) return;
-      setTitle((content.querySelector("[data-article-title]") ?? content.querySelector("h1"))?.textContent ?? "Wiki");
+      setTitle(
+        (
+          content.querySelector("[data-article-title]") ??
+          content.querySelector("h1")
+        )?.textContent ?? "Wiki",
+      );
       const used = new Set<string>();
       const outline = Array.from(content.querySelectorAll("h2, h3")).map(
         (heading) => {
@@ -78,7 +79,6 @@ export default function WikiShell({
         <main id="article-content" className={styles.main}>
           <div ref={contentRef}>{children}</div>
         </main>
-
       </div>
     </div>
   );
