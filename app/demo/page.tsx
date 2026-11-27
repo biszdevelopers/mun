@@ -104,7 +104,6 @@ export default function Demo() {
     <main className="min-h-screen bg-secondary-50 px-4 py-8 text-secondary-950 sm:px-8 sm:py-12">
       <div className="mx-auto max-w-7xl">
         biszmun
-
         {palettes.map((palette) => (
           <section
             key={palette.token}
@@ -118,7 +117,10 @@ export default function Demo() {
               </div>
               <div>
                 <code className="text-muted-foreground">
-                  <ThemeHex light={palette.defaultHex} dark={palette.darkDefaultHex} />
+                  <ThemeHex
+                    light={palette.defaultHex}
+                    dark={palette.darkDefaultHex}
+                  />
                 </code>
               </div>
             </div>
@@ -132,85 +134,133 @@ export default function Demo() {
                   />
                   <div className="mt-2 text-sm font-bold">{shades[index]}</div>
                   <code className="text-xs text-muted-foreground">
-                    <ThemeHex light={hex} dark={darkHex ?? palette.colors[palette.colors.length - index - 1][1]} />
+                    <ThemeHex
+                      light={hex}
+                      dark={
+                        darkHex ??
+                        palette.colors[palette.colors.length - index - 1][1]
+                      }
+                    />
                   </code>
                 </li>
               ))}
             </ul>
           </section>
         ))}
-
         <section
           aria-labelledby="loader-demo-heading"
           className="mt-5 rounded-2xl border border-solid border-secondary-200 bg-secondary p-4 sm:p-6"
         >
-          <h2 id="loader-demo-heading" className="m-0">Loading animation</h2>
+          <h2 id="loader-demo-heading" className="m-0">
+            Loading animation
+          </h2>
           <div className="mt-4 grid place-items-center rounded-xl border border-solid border-secondary-200 py-8">
             <LoadingGlobe />
           </div>
         </section>
-
         <section
           aria-labelledby="text-sizes-heading"
           className="mt-5 rounded-2xl border border-solid border-secondary-200 bg-secondary p-4 sm:p-6"
         >
-          <h2 id="text-sizes-heading" className="m-0">Text sizes</h2>
+          <h2 id="text-sizes-heading" className="m-0">
+            Text sizes
+          </h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl bg-secondary-50 p-4">
-              <small className="block text-secondary-600">Geologica Semibold · Current</small>
+              <small className="block text-secondary-600">
+                Geologica Semibold · Current
+              </small>
               <div className="mt-2 text-heading-3 font-semibold leading-tight">
                 Agenda and opening debate
               </div>
             </div>
             <div className="rounded-xl bg-secondary-50 p-4">
-              <small className="block text-secondary-600">Geologica Cursive Semibold · Previous</small>
-              <div className={`${geologicaCursiveSample.className} mt-2 text-heading-3 font-semibold leading-tight`}>
+              <small className="block text-secondary-600">
+                Geologica Cursive Semibold · Previous
+              </small>
+              <div
+                className={`${geologicaCursiveSample.className} mt-2 text-heading-3 font-semibold leading-tight`}
+              >
                 Agenda and opening debate
               </div>
             </div>
           </div>
           <ul className="mt-4 mb-0 list-none p-0">
             {headingSizes.map(({ level, size, className }) => (
-              <li key={level} className="border-0 border-t border-solid border-secondary-200 py-4">
-                <div className="text-caption text-secondary-600">H{level} · {size}</div>
-                <div className={`${className} mt-1 font-semibold leading-tight`}>Heading {level}</div>
+              <li
+                key={level}
+                className="border-0 border-t border-solid border-secondary-200 py-4"
+              >
+                <div className="text-caption text-secondary-600">
+                  H{level} · {size}
+                </div>
+                <div
+                  className={`${className} mt-1 font-semibold leading-tight`}
+                >
+                  Heading {level}
+                </div>
               </li>
             ))}
             <li className="border-0 border-t border-solid border-secondary-200 py-4">
-              <div className="text-caption text-secondary-600">Paragraph · Noto Serif · 1.125rem · 500</div>
+              <div className="text-caption text-secondary-600">
+                Paragraph · Noto Serif · 1.125rem · 500
+              </div>
               <p className="mt-1 mb-0 max-w-prose">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+                ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                ut aliquip ex ea commodo consequat.
               </p>
             </li>
             <li className="border-0 border-t border-solid border-secondary-200 py-4">
-              <div className="text-caption text-secondary-600">UI text · 1rem</div>
+              <div className="text-caption text-secondary-600">
+                UI text · 1rem
+              </div>
               <div className="mt-1 text-ui">View conference schedule</div>
             </li>
             <li className="border-0 border-t border-solid border-secondary-200 pt-4">
-              <div className="text-caption text-secondary-600">Small text · 0.875rem</div>
-              <small className="mt-1 block">For captions, credits, and supporting notes.</small>
+              <div className="text-caption text-secondary-600">
+                Small text · 0.875rem
+              </div>
+              <small className="mt-1 block">
+                For captions, credits, and supporting notes.
+              </small>
             </li>
           </ul>
 
-          <article aria-labelledby="specimen-heading" className="mt-6 rounded-xl bg-secondary-50 p-4 sm:p-6">
+          <article
+            aria-labelledby="specimen-heading"
+            className="mt-6 rounded-xl bg-secondary-50 p-4 sm:p-6"
+          >
             <header>
-              <small className="block text-secondary-600">Article specimen</small>
-              <h3 id="specimen-heading" className="mt-2 mb-0">Getting ready for committee</h3>
+              <small className="block text-secondary-600">
+                Article specimen
+              </small>
+              <h3 id="specimen-heading" className="mt-2 mb-0">
+                Getting ready for committee
+              </h3>
             </header>
             <p className="mt-3 mb-0 max-w-prose">
-              Before the first session, read the background guide and identify the questions your
-              delegation needs to answer. Write down <strong>one priority</strong> you can explain
-              clearly in an opening statement.
+              Before the first session, read the background guide and identify
+              the questions your delegation needs to answer. Write down{" "}
+              <strong>one priority</strong> you can explain clearly in an
+              opening statement.
             </p>
             <h4 className="mt-5 mb-0">Bring a short reference sheet</h4>
             <p className="mt-2 mb-0 max-w-prose">
-              Keep key facts and source notes on one page so you can find them quickly during debate.
-              Use the <a href="#primary-heading" className="text-primary underline dark:text-primary-800">primary palette</a>{" "}
+              Keep key facts and source notes on one page so you can find them
+              quickly during debate. Use the{" "}
+              <a
+                href="#primary-heading"
+                className="text-primary underline dark:text-primary-800"
+              >
+                primary palette
+              </a>{" "}
               to highlight the items you need to scan at a glance.
             </p>
             <footer className="mt-4">
-              <small className="text-secondary-600">Delegate preparation notes</small>
+              <small className="text-secondary-600">
+                Delegate preparation notes
+              </small>
             </footer>
           </article>
         </section>

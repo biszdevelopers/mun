@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import ThemeProvider from "./components/ThemeProvider";
 
 const geologica = localFont({
   src: [
@@ -35,10 +36,12 @@ export const viewport: Viewport = {
   themeColor: "#f5f5f5",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${geologica.className} ${notoSerif.variable}`}>
-      <body>{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${geologica.className} ${notoSerif.variable}`}>
+      <body><ThemeProvider>{children}</ThemeProvider></body>
     </html>
   );
 }

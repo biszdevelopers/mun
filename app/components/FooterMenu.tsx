@@ -15,7 +15,9 @@ export default function FooterMenu({ title, links }: FooterMenuProps) {
 
   return (
     <nav className={styles.menu} aria-labelledby={titleId}>
-      <h3 id={titleId} className={styles.title}>{title}</h3>
+      <h3 id={titleId} className={styles.title}>
+        {title}
+      </h3>
       <ul className={styles.links}>
         {links.map(({ label, href, external }) => (
           <li key={label}>
@@ -23,10 +25,17 @@ export default function FooterMenu({ title, links }: FooterMenuProps) {
               href={href}
               target={external ? "_blank" : undefined}
               rel={external ? "noopener noreferrer" : undefined}
-              onClick={(event) => { if (!href) event.preventDefault(); }}
+              onClick={(event) => {
+                if (!href) event.preventDefault();
+              }}
             >
               {label}
-              {external && <ExternalLink className={styles.externalIcon} aria-hidden="true" />}
+              {external && (
+                <ExternalLink
+                  className={styles.externalIcon}
+                  aria-hidden="true"
+                />
+              )}
             </a>
           </li>
         ))}

@@ -5,8 +5,12 @@ import { fetch } from "undici";
 const checkInterval = 300_000;
 const requestTimeout = 3_000;
 
-export function createRemoteAsset<T>(url: string, parse: (source: string) => T) {
-  let cached: { data: T; etag: string | null; lastModified: string | null } | undefined;
+export function createRemoteAsset<T>(
+  url: string,
+  parse: (source: string) => T,
+) {
+  let cached:
+    { data: T; etag: string | null; lastModified: string | null } | undefined;
   let pending: Promise<T | undefined> | undefined;
   let nextCheck = 0;
 
@@ -14,7 +18,8 @@ export function createRemoteAsset<T>(url: string, parse: (source: string) => T) 
     try {
       const headers: Record<string, string> = {};
       if (cached?.etag) headers["If-None-Match"] = cached.etag;
-      if (cached?.lastModified) headers["If-Modified-Since"] = cached.lastModified;
+      if (cached?.lastModified)
+        headers["If-Modified-Since"] = cached.lastModified;
 
       const response = await fetch(url, {
         headers,

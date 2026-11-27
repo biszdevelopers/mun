@@ -27,7 +27,9 @@ export default function LatestAlert({
         <Calendar className="size-4 shrink-0" aria-hidden="true" />
         {date}
       </time>
-      <h2 className="m-0 text-heading-6 leading-tight font-normal text-primary">{title}</h2>
+      <h2 className="m-0 text-heading-6 leading-tight font-normal text-primary">
+        {title}
+      </h2>
       <p className="text-serif m-0 max-w-[40ch] text-ui leading-tight text-pretty text-secondary-900">
         {body}
       </p>

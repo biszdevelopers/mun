@@ -2,6 +2,8 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
+@custom-variant dark (&:where(html[data-theme="dark"]:not(:has([data-page-theme="light"])), html[data-theme="dark"]:not(:has([data-page-theme="light"])) *));
+
 @theme static {
   --color-primary: var(--color-primary-700);
   --color-primary-50: #f4f8ff;
@@ -59,7 +61,13 @@
 }
 
 :root {
-  color-scheme: light dark;
+  --page-surface: #ffffff;
+  --page-foreground: #202d45;
+  --page-muted: #68758a;
+  --page-border: #e1e7ef;
+  --page-soft: #f0f3f8;
+  --page-accent: var(--color-primary);
+  color-scheme: light;
   background: var(--color-secondary-100);
   color: var(--color-secondary-900);
 }
@@ -79,17 +87,34 @@ body:has([data-page-theme="light"]) {
     color: var(--color-white);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 600;
     line-height: 1.25;
   }
 
-  h1 { font-size: var(--text-heading-1); }
-  h2 { font-size: var(--text-heading-2); }
-  h3 { font-size: var(--text-heading-3); }
-  h4 { font-size: var(--text-heading-4); }
-  h5 { font-size: var(--text-heading-5); }
-  h6 { font-size: var(--text-heading-6); }
+  h1 {
+    font-size: var(--text-heading-1);
+  }
+  h2 {
+    font-size: var(--text-heading-2);
+  }
+  h3 {
+    font-size: var(--text-heading-3);
+  }
+  h4 {
+    font-size: var(--text-heading-4);
+  }
+  h5 {
+    font-size: var(--text-heading-5);
+  }
+  h6 {
+    font-size: var(--text-heading-6);
+  }
 
   p {
     font-family: var(--font-noto-serif, Georgia), serif;
@@ -102,7 +127,10 @@ body:has([data-page-theme="light"]) {
     font-weight: 600;
   }
 
-  button, input, select, textarea {
+  button,
+  input,
+  select,
+  textarea {
     font-family: inherit;
     font-size: var(--text-ui);
   }
@@ -129,7 +157,8 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html:has([data-page-theme="light"]) {
+  html:has([data-page-theme="light"]),
+  html:has([data-page-layout="wiki"]) {
     scroll-behavior: smooth;
   }
 }
@@ -138,45 +167,55 @@ body {
   min-width: 320px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(:has([data-page-theme="light"])) {
-    /* Reverse the blue scale around the shared primary-700. */
-    --color-primary-50: #101f3f;
-    --color-primary-100: #15264c;
-    --color-primary-200: #192e5a;
-    --color-primary-300: #1e3568;
-    --color-primary-400: #233d77;
-    --color-primary-500: #284586;
-    --color-primary-600: #2d4d95;
-    --color-primary-800: #5883e2;
-    --color-primary-900: #a7c3fa;
-    --color-primary-950: #f4f8ff;
+:root[data-theme="dark"]:not(:has([data-page-theme="light"])) {
+  color-scheme: dark;
+  --page-surface: #11151c;
+  --page-foreground: #e6eaf2;
+  --page-muted: #a5b0c2;
+  --page-border: #303a4b;
+  --page-soft: #1c2431;
+  --page-accent: #a7c3fa;
 
-    /* Invert the UN scale around un-500; --color-un stays #009edb. */
-    --color-un-50: #002639;
-    --color-un-100: #003e5a;
-    --color-un-200: #00557b;
-    --color-un-300: #006d9c;
-    --color-un-400: #0086be;
-    --color-un-600: #55b8ed;
-    --color-un-700: #8cd1fa;
-    --color-un-800: #bce5fe;
-    --color-un-900: #dcf2ff;
-    --color-un-950: #eef9ff;
+  /* Reverse the blue scale around the shared primary-700. */
+  --color-primary-50: #101f3f;
+  --color-primary-100: #15264c;
+  --color-primary-200: #192e5a;
+  --color-primary-300: #1e3568;
+  --color-primary-400: #233d77;
+  --color-primary-500: #284586;
+  --color-primary-600: #2d4d95;
+  --color-primary-800: #5883e2;
+  --color-primary-900: #a7c3fa;
+  --color-primary-950: #f4f8ff;
 
-    --color-secondary: var(--color-black);
-    --color-secondary-50: var(--color-neutral-950);
-    --color-secondary-100: var(--color-neutral-900);
-    --color-secondary-200: var(--color-neutral-800);
-    --color-secondary-300: var(--color-neutral-700);
-    --color-secondary-400: var(--color-neutral-600);
-    --color-secondary-600: var(--color-neutral-400);
-    --color-secondary-700: var(--color-neutral-300);
-    --color-secondary-800: var(--color-neutral-200);
-    --color-secondary-900: var(--color-neutral-100);
-    --color-secondary-950: var(--color-neutral-50);
+  /* Invert the UN scale around un-500; --color-un stays #009edb. */
+  --color-un-50: #002639;
+  --color-un-100: #003e5a;
+  --color-un-200: #00557b;
+  --color-un-300: #006d9c;
+  --color-un-400: #0086be;
+  --color-un-600: #55b8ed;
+  --color-un-700: #8cd1fa;
+  --color-un-800: #bce5fe;
+  --color-un-900: #dcf2ff;
+  --color-un-950: #eef9ff;
 
-    background: var(--color-secondary-50);
-    color: var(--color-secondary-950);
-  }
+  --color-secondary: var(--color-black);
+  --color-secondary-50: var(--color-neutral-950);
+  --color-secondary-100: var(--color-neutral-900);
+  --color-secondary-200: var(--color-neutral-800);
+  --color-secondary-300: var(--color-neutral-700);
+  --color-secondary-400: var(--color-neutral-600);
+  --color-secondary-600: var(--color-neutral-400);
+  --color-secondary-700: var(--color-neutral-300);
+  --color-secondary-800: var(--color-neutral-200);
+  --color-secondary-900: var(--color-neutral-100);
+  --color-secondary-950: var(--color-neutral-50);
+
+  background: var(--page-surface);
+  color: var(--page-foreground);
+}
+
+:root:has([data-page-layout="wiki"]):not(:has([data-page-theme="light"])) {
+  background-color: var(--color-primary);
 }

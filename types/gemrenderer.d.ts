@@ -20,7 +20,10 @@ declare module "gemrenderer" {
     glint?: number;
   }
 
-  export function getGemImage(spec: GemSpec, clarity?: number): Promise<string | null>;
+  export function getGemImage(
+    spec: GemSpec,
+    clarity?: number,
+  ): Promise<string | null>;
   export function configure(options: { resolution: number }): void;
   export function renderGemFrame(
     target: HTMLCanvasElement,

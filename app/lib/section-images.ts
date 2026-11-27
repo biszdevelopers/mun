@@ -1,6 +1,6 @@
-import sectionThree from "../content/section-3.json";
-
-async function loadFirstAvailable(sources: string[]): Promise<string | undefined> {
+async function loadFirstAvailable(
+  sources: string[],
+): Promise<string | undefined> {
   for (const source of sources.filter((src) => src.trim())) {
     const image = new Image();
     let timeout: ReturnType<typeof setTimeout> | undefined;
@@ -9,7 +9,10 @@ async function loadFirstAvailable(sources: string[]): Promise<string | undefined
       await Promise.race([
         image.decode(),
         new Promise<never>((_, reject) => {
-          timeout = setTimeout(() => reject(new Error("Image timed out")), 6000);
+          timeout = setTimeout(
+            () => reject(new Error("Image timed out")),
+            6000,
+          );
         }),
       ]);
       return source;
@@ -24,10 +27,12 @@ async function loadFirstAvailable(sources: string[]): Promise<string | undefined
 
 let pending: Promise<Record<string, string | undefined>> | undefined;
 
-export function loadSectionImages() {
+export function loadSectionImages(images: Record<string, string[]>) {
   // Share the selected sources between the loading screen and the collage.
-  return pending ??= Promise.all(
-    Object.entries(sectionThree.images).map(async ([key, sources]) =>
-      [key, await loadFirstAvailable(sources)] as const),
-  ).then((entries) => Object.fromEntries(entries));
+  return (pending ??= Promise.all(
+    Object.entries(images).map(
+      async ([key, sources]) =>
+        [key, await loadFirstAvailable(sources)] as const,
+    ),
+  ).then((entries) => Object.fromEntries(entries)));
 }

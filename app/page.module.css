@@ -201,9 +201,12 @@
     position: absolute;
     inset: 0;
     content: "";
-    background:
-      linear-gradient(to right,
-        transparent 49.25%, white 49.25% 50.75%, transparent 50.75%);
+    background: linear-gradient(
+      to right,
+      transparent 49.25%,
+      white 49.25% 50.75%,
+      transparent 50.75%
+    );
     pointer-events: none;
   }
 
@@ -253,7 +256,8 @@
   justify-content: center;
   padding: clamp(1.5rem, 6vw, 6rem);
   text-align: center;
-  background: url("/un-emblem-outline.svg") center / min(82vw, 68dvh, 40rem) auto no-repeat;
+  background: url("/un-emblem-outline.svg") center / min(82vw, 68dvh, 40rem)
+    auto no-repeat;
 }
 
 .ctaThemeLabel {
@@ -301,7 +305,9 @@
 }
 
 .loading {
-  transition: opacity 300ms ease-out, visibility 300ms;
+  transition:
+    opacity 300ms ease-out,
+    visibility 300ms;
 }
 
 .loading.imagesReady:has(~ main .heading) {
@@ -400,7 +406,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 500ms ease-out, visibility 500ms;
+  transition:
+    opacity 500ms ease-out,
+    visibility 500ms;
 }
 
 .topNavigationVisible {
@@ -414,7 +422,9 @@
   inset: 0;
   color: white;
   pointer-events: none;
-  clip-path: inset(var(--theme-clip-top, 0px) 0 calc(100% - var(--theme-clip, 100%)) 0);
+  clip-path: inset(
+    var(--theme-clip-top, 0px) 0 calc(100% - var(--theme-clip, 100%)) 0
+  );
 }
 
 .topNavigationCommitteesLight {
@@ -422,7 +432,9 @@
   inset: 0;
   color: white;
   pointer-events: none;
-  clip-path: inset(var(--committees-clip-top, 100%) 0 var(--committees-clip-bottom, 0px) 0);
+  clip-path: inset(
+    var(--committees-clip-top, 100%) 0 var(--committees-clip-bottom, 0px) 0
+  );
 }
 
 .topNavigation .bookmarkItems {
@@ -469,7 +481,9 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 300ms ease-out, visibility 300ms;
+  transition:
+    opacity 300ms ease-out,
+    visibility 300ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -507,7 +521,7 @@
 .title {
   margin: 0;
   font-size: inherit;
-  font-weight:700;
+  font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.06em;
   white-space: nowrap;

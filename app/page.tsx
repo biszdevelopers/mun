@@ -9,7 +9,11 @@ import HomeNavigation from "./components/HomeNavigation";
 import { Globe } from "./components/LoadingOverlay";
 import HomeLoadingOverlay from "./components/HomeLoadingOverlay";
 import { Button } from "./components/ui/button";
-import { getHeroTheme, getHeroThemeDescription, getLatestEvent } from "./lib/events";
+import {
+  getHeroTheme,
+  getHeroThemeDescription,
+  getLatestEvent,
+} from "./lib/events";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -21,7 +25,18 @@ export default function Home() {
   return (
     <>
       <HomeLoadingOverlay />
-      <HeroScroll theme={<Suspense fallback={null}><HomeTheme /></Suspense>} theme_description={<Suspense fallback={null}><HomeThemeDescription /></Suspense>}>
+      <HeroScroll
+        theme={
+          <Suspense fallback={null}>
+            <HomeTheme />
+          </Suspense>
+        }
+        theme_description={
+          <Suspense fallback={null}>
+            <HomeThemeDescription />
+          </Suspense>
+        }
+      >
         <section className={styles.hero}>
           <Suspense fallback={null}>
             <HomeContent />
@@ -47,7 +62,6 @@ async function HomeThemeDescription() {
 }
 
 async function HomeContent() {
-
   // sec 1
   await connection();
   const event = await getLatestEvent();
@@ -68,7 +82,11 @@ async function HomeContent() {
         >
           {event.applicationLink && (
             <Button asChild className="mt-2">
-              <a href={event.applicationLink.href} target="_blank" rel="noopener noreferrer">
+              <a
+                href={event.applicationLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {event.applicationLink.label}
                 <ExternalLink aria-hidden="true" />
               </a>
@@ -77,7 +95,9 @@ async function HomeContent() {
         </LatestAlert>
       )}
       <div className={styles.heading}>
-        <h1 className={styles.title}>BISZ<span className={styles.mun}>MUN</span></h1>
+        <h1 className={styles.title}>
+          BISZ<span className={styles.mun}>MUN</span>
+        </h1>
         <time className={`text-serif ${styles.date}`} dateTime="2026-02-27">
           February 27th, 2026
         </time>

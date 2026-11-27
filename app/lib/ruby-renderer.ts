@@ -14,4 +14,5 @@ export const ruby: GemSpec = {
 };
 
 export const rubyResolution = gemResolution;
-export const preloadRuby = (target: HTMLCanvasElement) => preloadGem(target, ruby);
+export const preloadRuby = (target: HTMLCanvasElement) =>
+  preloadGem(target, ruby);

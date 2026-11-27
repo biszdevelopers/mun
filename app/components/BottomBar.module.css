@@ -84,3 +84,8 @@
     margin-inline: calc(var(--footer-padding) * -1);
   }
 }
+
+.appearance {
+  grid-column: 1 / -1;
+  padding-inline: calc(clamp(0.75rem, 1.05vw, 1.125rem) * 0.85);
+}

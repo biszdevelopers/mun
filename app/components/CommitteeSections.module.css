@@ -34,7 +34,11 @@
 
 .emoji {
   position: absolute;
-  width: clamp(calc(7rem * var(--emoji-scale)), calc(16vw * var(--emoji-scale)), calc(14rem * var(--emoji-scale)));
+  width: clamp(
+    calc(7rem * var(--emoji-scale)),
+    calc(16vw * var(--emoji-scale)),
+    calc(14rem * var(--emoji-scale))
+  );
   aspect-ratio: 1;
   transform: translate(-50%, -50%) rotate(var(--emoji-tilt));
 }
@@ -113,8 +117,24 @@
 .rubyFallback {
   position: absolute;
   inset: 20% 10%;
-  background: conic-gradient(from 25deg, #eadcfb, var(--gem-color, #a6001a), #553464, var(--gem-color, #a6001a), #eadcfb);
-  clip-path: polygon(22% 0, 78% 0, 100% 22%, 100% 78%, 78% 100%, 22% 100%, 0 78%, 0 22%);
+  background: conic-gradient(
+    from 25deg,
+    #eadcfb,
+    var(--gem-color, #a6001a),
+    #553464,
+    var(--gem-color, #a6001a),
+    #eadcfb
+  );
+  clip-path: polygon(
+    22% 0,
+    78% 0,
+    100% 22%,
+    100% 78%,
+    78% 100%,
+    22% 100%,
+    0 78%,
+    0 22%
+  );
 }
 
 .rubyGem[data-ready="true"] .rubyCanvas {
@@ -129,7 +149,8 @@
   /* Separate elements let idle motion and scroll parallax compose freely. */
   .emojiIdle {
     animation:
-      float var(--float-duration) ease-in-out var(--idle-delay) infinite alternate,
+      float var(--float-duration) ease-in-out var(--idle-delay) infinite
+        alternate,
       rock var(--rock-duration) ease-in-out var(--idle-delay) infinite alternate;
     animation-play-state: paused;
   }
@@ -157,7 +178,11 @@
 
 @media (width < 48rem) {
   .emoji {
-    width: clamp(calc(4rem * var(--emoji-scale)), calc(23vw * var(--emoji-scale)), calc(6.5rem * var(--emoji-scale)));
+    width: clamp(
+      calc(4rem * var(--emoji-scale)),
+      calc(23vw * var(--emoji-scale)),
+      calc(6.5rem * var(--emoji-scale))
+    );
   }
 
   .bill {

@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-import sectionThree from "../content/section-3.json";
 import styles from "../page.module.css";
 import HomeNavigation from "./HomeNavigation";
 import BottomBar from "./BottomBar";
@@ -15,6 +14,34 @@ import { Button } from "./ui/button";
 import { loadSectionImages } from "../lib/section-images";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const sectionThree = {
+  title: "About BISZMUN",
+  description:
+    "BISZMUN is hosted by the BISZ Model United Nations Club, a student-led club that aims to develop students' research, communication and diplomacy skills.",
+  images: {
+    image1: [
+      "https://assets.bisz.dev/741ed5a49ef18c32c537032cf234a0abf9a7e46a7120531a6df08565f58fc3e7",
+      "/section-3-image-1.png",
+    ],
+    image2: [
+      "https://assets.bisz.dev/02a2516720c088e49b5cc571b29bfdf9f2814116aa6c07fef4556c914e159d50",
+      "/section-3-image-2.jpg",
+    ],
+    image3: [
+      "https://assets.bisz.dev/444f489240a9c9279f61690c9a6e9c479c19af95353aee8a596382fbdf58444c",
+      "/section-3-image-3.jpg",
+    ],
+    image4: [],
+    image5: [],
+    image6: [],
+    image7: [],
+    image8: [],
+    image9: [],
+  },
+};
+
+export const sectionThreeImages = sectionThree.images;
 
 const collageRevealOrder = [4, 0, 8, 2, 6, 3, 1, 7, 5];
 // Images 1–6 fill the two mobile columns; 7–9 add the desktop right column.
@@ -30,23 +57,36 @@ const collageTiles = [
   { position: styles.bottomRight, image: "image9" },
 ];
 
-function CTATheme({ theme, theme_description }: { theme: ReactNode; theme_description: ReactNode }) {
+function CTATheme({
+  theme,
+  theme_description,
+}: {
+  theme: ReactNode;
+  theme_description: ReactNode;
+}) {
   return (
     <div className={styles.ctaTheme}>
-      <h2 className={styles.ctaThemeTitle}>
-        "{theme}"
-      </h2>
-      <p className={styles.ctaThemeDescription}>
-        {theme_description}
-      </p>
-      <Button asChild className="mt-6 bg-white text-primary hover:bg-white/90 focus-visible:outline-white">
+      <h2 className={styles.ctaThemeTitle}>"{theme}"</h2>
+      <p className={styles.ctaThemeDescription}>{theme_description}</p>
+      <Button
+        asChild
+        className="mt-6 bg-white text-primary hover:bg-white/90 focus-visible:outline-white"
+      >
         <a href="/theme">See theme details</a>
       </Button>
     </div>
   );
 }
 
-export default function HeroScroll({ children, theme, theme_description }: { children: ReactNode; theme: ReactNode; theme_description: ReactNode }) {
+export default function HeroScroll({
+  children,
+  theme,
+  theme_description,
+}: {
+  children: ReactNode;
+  theme: ReactNode;
+  theme_description: ReactNode;
+}) {
   const scene = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const registrationScene = useRef<HTMLDivElement>(null);
@@ -56,14 +96,18 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
   const aboutSection = useRef<HTMLElement>(null);
   const [showTopNavigation, setShowTopNavigation] = useState(false);
   const [footerReached, setFooterReached] = useState(false);
-  const [imageSources, setImageSources] = useState<Record<string, string | undefined>>({});
+  const [imageSources, setImageSources] = useState<
+    Record<string, string | undefined>
+  >({});
 
   useEffect(() => {
     let active = true;
-    void loadSectionImages().then((sources) => {
+    void loadSectionImages(sectionThreeImages).then((sources) => {
       if (active) setImageSources(sources);
     });
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -72,15 +116,21 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
 
     const updateFooterVisibility = () => {
       const bounds = footer.getBoundingClientRect();
-      const scrollingElement = document.scrollingElement ?? document.documentElement;
-      const atPageBottom = scrollingElement.scrollTop + scrollingElement.clientHeight
-        >= scrollingElement.scrollHeight - 2;
-      setFooterReached(bounds.top <= 2 || (atPageBottom && bounds.top < window.innerHeight));
+      const scrollingElement =
+        document.scrollingElement ?? document.documentElement;
+      const atPageBottom =
+        scrollingElement.scrollTop + scrollingElement.clientHeight >=
+        scrollingElement.scrollHeight - 2;
+      setFooterReached(
+        bounds.top <= 2 || (atPageBottom && bounds.top < window.innerHeight),
+      );
     };
 
     // Keep checking at the final scroll position, independently of GSAP's
     // cached trigger range, including restored scroll positions and resizes.
-    window.addEventListener("scroll", updateFooterVisibility, { passive: true });
+    window.addEventListener("scroll", updateFooterVisibility, {
+      passive: true,
+    });
     window.addEventListener("resize", updateFooterVisibility);
     window.addEventListener("pageshow", updateFooterVisibility);
     const observer = new ResizeObserver(updateFooterVisibility);
@@ -96,143 +146,214 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
     };
   }, []);
 
-  useGSAP(() => {
-    const ctaPanel = panel.current;
-    const collageElement = collage.current;
-    const sceneElement = scene.current;
-    const navigation = topNavigation.current;
-    if (!ctaPanel || !collageElement || !sceneElement || !navigation) return;
+  useGSAP(
+    () => {
+      const ctaPanel = panel.current;
+      const collageElement = collage.current;
+      const sceneElement = scene.current;
+      const navigation = topNavigation.current;
+      if (!ctaPanel || !collageElement || !sceneElement || !navigation) return;
 
-    const media = gsap.matchMedia();
-    const smallScreen = window.matchMedia("(width < 64rem)");
-    const root = document.documentElement;
-    const previousEdgeBackground = root.style.getPropertyValue("--page-edge-background");
-    const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    const previousThemeColor = themeMeta?.content;
-    let edgeBackground = "";
+      const media = gsap.matchMedia();
+      const smallScreen = window.matchMedia("(width < 64rem)");
+      const root = document.documentElement;
+      const previousEdgeBackground = root.style.getPropertyValue(
+        "--page-edge-background",
+      );
+      const themeMeta = document.querySelector<HTMLMetaElement>(
+        'meta[name="theme-color"]',
+      );
+      const previousThemeColor = themeMeta?.content;
+      let edgeBackground = "";
 
-    const syncNavigation = () => {
-      // Follow the canvas entrance, then stay at the viewport's top edge.
-      const canvasTop = Math.max(0, ctaPanel.getBoundingClientRect().top);
-      const offset = smallScreen.matches ? 0 : canvasTop;
-      gsap.set(navigation, { y: offset });
-      if (aboutSection.current) {
-        const navigationBounds = navigation.getBoundingClientRect();
-        const boundary = aboutSection.current.getBoundingClientRect().top;
-        const whiteHeight = Math.max(0, Math.min(navigationBounds.height, boundary - navigationBounds.top));
-        const whiteTop = Math.max(0, Math.min(whiteHeight, canvasTop - navigationBounds.top));
-        navigation.style.setProperty("--theme-clip", `${whiteHeight}px`);
-        navigation.style.setProperty("--theme-clip-top", `${whiteTop}px`);
-        if (committeesPanel.current) {
-          const bounds = committeesPanel.current.getBoundingClientRect();
-          const firstCommittee = aboutSection.current.parentElement?.querySelector("[data-committee-section]");
-          const blueBottom = Math.min(bounds.bottom, firstCommittee?.getBoundingClientRect().top ?? bounds.bottom);
-          const clipTop = Math.max(0, Math.min(navigationBounds.height, bounds.top - navigationBounds.top));
-          const clipBottom = Math.max(0, Math.min(navigationBounds.height, blueBottom - navigationBounds.top));
-          navigation.style.setProperty("--committees-clip-top", `${clipTop}px`);
-          navigation.style.setProperty("--committees-clip-bottom", `${navigationBounds.height - clipBottom}px`);
+      const syncNavigation = () => {
+        // Follow the canvas entrance, then stay at the viewport's top edge.
+        const canvasTop = Math.max(0, ctaPanel.getBoundingClientRect().top);
+        const offset = smallScreen.matches ? 0 : canvasTop;
+        gsap.set(navigation, { y: offset });
+        if (aboutSection.current) {
+          const navigationBounds = navigation.getBoundingClientRect();
+          const boundary = aboutSection.current.getBoundingClientRect().top;
+          const whiteHeight = Math.max(
+            0,
+            Math.min(navigationBounds.height, boundary - navigationBounds.top),
+          );
+          const whiteTop = Math.max(
+            0,
+            Math.min(whiteHeight, canvasTop - navigationBounds.top),
+          );
+          navigation.style.setProperty("--theme-clip", `${whiteHeight}px`);
+          navigation.style.setProperty("--theme-clip-top", `${whiteTop}px`);
+          if (committeesPanel.current) {
+            const bounds = committeesPanel.current.getBoundingClientRect();
+            const firstCommittee =
+              aboutSection.current.parentElement?.querySelector(
+                "[data-committee-section]",
+              );
+            const blueBottom = Math.min(
+              bounds.bottom,
+              firstCommittee?.getBoundingClientRect().top ?? bounds.bottom,
+            );
+            const clipTop = Math.max(
+              0,
+              Math.min(
+                navigationBounds.height,
+                bounds.top - navigationBounds.top,
+              ),
+            );
+            const clipBottom = Math.max(
+              0,
+              Math.min(
+                navigationBounds.height,
+                blueBottom - navigationBounds.top,
+              ),
+            );
+            navigation.style.setProperty(
+              "--committees-clip-top",
+              `${clipTop}px`,
+            );
+            navigation.style.setProperty(
+              "--committees-clip-bottom",
+              `${navigationBounds.height - clipBottom}px`,
+            );
+          }
+
+          // Safari paints its safe areas from the root background.
+          const sampleLine = window.innerHeight / 2;
+          let visibleSection: Element | null =
+            boundary <= sampleLine
+              ? aboutSection.current
+              : canvasTop <= sampleLine
+                ? ctaPanel
+                : sceneElement.querySelector("section");
+          while (
+            visibleSection?.nextElementSibling &&
+            visibleSection.getBoundingClientRect().bottom <= sampleLine
+          ) {
+            visibleSection = visibleSection.nextElementSibling;
+          }
+          if (visibleSection === registrationScene.current) {
+            const bounds = committeesPanel.current?.getBoundingClientRect();
+            visibleSection =
+              bounds && bounds.top <= sampleLine && bounds.bottom > sampleLine
+                ? committeesPanel.current
+                : (registrationScene.current?.querySelector("#registration") ??
+                  null);
+          }
+          const background = visibleSection
+            ? getComputedStyle(visibleSection).backgroundColor
+            : "";
+          if (background && background !== edgeBackground) {
+            edgeBackground = background;
+            root.style.setProperty("--page-edge-background", background);
+            if (themeMeta) themeMeta.content = background;
+          }
         }
+        setShowTopNavigation(smallScreen.matches || offset === 0);
+      };
 
-        // Safari paints its safe areas from the root background.
-        const sampleLine = window.innerHeight / 2;
-        let visibleSection: Element | null = boundary <= sampleLine
-          ? aboutSection.current
-          : canvasTop <= sampleLine ? ctaPanel : sceneElement.querySelector("section");
-        while (visibleSection?.nextElementSibling && visibleSection.getBoundingClientRect().bottom <= sampleLine) {
-          visibleSection = visibleSection.nextElementSibling;
-        }
-        if (visibleSection === registrationScene.current) {
-          const bounds = committeesPanel.current?.getBoundingClientRect();
-          visibleSection = bounds && bounds.top <= sampleLine && bounds.bottom > sampleLine
-            ? committeesPanel.current
-            : registrationScene.current?.querySelector("#registration") ?? null;
-        }
-        const background = visibleSection ? getComputedStyle(visibleSection).backgroundColor : "";
-        if (background && background !== edgeBackground) {
-          edgeBackground = background;
-          root.style.setProperty("--page-edge-background", background);
-          if (themeMeta) themeMeta.content = background;
-        }
-      }
-      setShowTopNavigation(smallScreen.matches || offset === 0);
-    };
-
-    ScrollTrigger.create({
-      trigger: sceneElement,
-      start: "top bottom",
-      end: "max",
-      onUpdate: syncNavigation,
-      onRefresh: syncNavigation,
-    });
-    syncNavigation();
-    window.addEventListener("scroll", syncNavigation, { passive: true });
-    smallScreen.addEventListener("change", syncNavigation);
-
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      if (committeesPanel.current && registrationScene.current) {
-        const overlay = committeesPanel.current;
-        gsap.fromTo(overlay, { y: 0, yPercent: 100 }, {
-          yPercent: 0,
-          ease: "none",
-          onUpdate: syncNavigation,
-          scrollTrigger: {
-            trigger: registrationScene.current,
-            start: "top top",
-            end: () => `+=${overlay.offsetHeight}`,
-            scrub: true,
-          },
-        });
-      }
-
-      gsap.fromTo(ctaPanel, { y: 0, yPercent: 100 }, {
-        yPercent: 0,
-        ease: "none",
+      ScrollTrigger.create({
+        trigger: sceneElement,
+        start: "top bottom",
+        end: "max",
         onUpdate: syncNavigation,
-        scrollTrigger: {
-          trigger: scene.current,
-          start: "top top",
-          end: () => `+=${ctaPanel.offsetHeight}`,
-          scrub: true,
-        },
+        onRefresh: syncNavigation,
+      });
+      syncNavigation();
+      window.addEventListener("scroll", syncNavigation, { passive: true });
+      smallScreen.addEventListener("change", syncNavigation);
+
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        if (committeesPanel.current && registrationScene.current) {
+          const overlay = committeesPanel.current;
+          gsap.fromTo(
+            overlay,
+            { y: 0, yPercent: 100 },
+            {
+              yPercent: 0,
+              ease: "none",
+              onUpdate: syncNavigation,
+              scrollTrigger: {
+                trigger: registrationScene.current,
+                start: "top top",
+                end: () => `+=${overlay.offsetHeight}`,
+                scrub: true,
+              },
+            },
+          );
+        }
+
+        gsap.fromTo(
+          ctaPanel,
+          { y: 0, yPercent: 100 },
+          {
+            yPercent: 0,
+            ease: "none",
+            onUpdate: syncNavigation,
+            scrollTrigger: {
+              trigger: scene.current,
+              start: "top top",
+              end: () => `+=${ctaPanel.offsetHeight}`,
+              scrub: true,
+            },
+          },
+        );
+
+        const tiles = collageElement.querySelectorAll(`.${styles.collageTile}`);
+        const orderedTiles = collageRevealOrder.map((index) => tiles[index]);
+
+        gsap
+          .timeline({
+            defaults: { stagger: 0.11 },
+            scrollTrigger: {
+              trigger: collageElement,
+              // Mobile fills the section and can be taller than the viewport.
+              // Reveal on entry rather than waiting for its bottom to be visible.
+              start: () =>
+                window.matchMedia("(width < 48rem)").matches
+                  ? "clamp(top 80%)"
+                  : "bottom bottom",
+              once: true,
+            },
+          })
+          .fromTo(
+            orderedTiles,
+            { z: -220 },
+            {
+              z: 0,
+              clearProps: "transform",
+              duration: 2,
+              ease: "power2.out",
+            },
+            0,
+          )
+          .to(
+            orderedTiles,
+            {
+              opacity: 1,
+              duration: 1.3,
+              ease: "power2.out",
+            },
+            0,
+          );
       });
 
-      const tiles = collageElement.querySelectorAll(`.${styles.collageTile}`);
-      const orderedTiles = collageRevealOrder.map((index) => tiles[index]);
-
-      gsap.timeline({
-        defaults: { stagger: 0.11 },
-        scrollTrigger: {
-          trigger: collageElement,
-          // Mobile fills the section and can be taller than the viewport.
-          // Reveal on entry rather than waiting for its bottom to be visible.
-          start: () => window.matchMedia("(width < 48rem)").matches
-            ? "clamp(top 80%)"
-            : "bottom bottom",
-          once: true,
-        },
-      })
-        .fromTo(orderedTiles, { z: -220 }, {
-          z: 0,
-          clearProps: "transform",
-          duration: 2,
-          ease: "power2.out",
-        }, 0)
-        .to(orderedTiles, {
-          opacity: 1,
-          duration: 1.3,
-          ease: "power2.out",
-        }, 0);
-    });
-
-    return () => {
-      window.removeEventListener("scroll", syncNavigation);
-      smallScreen.removeEventListener("change", syncNavigation);
-      if (previousEdgeBackground) root.style.setProperty("--page-edge-background", previousEdgeBackground);
-      else root.style.removeProperty("--page-edge-background");
-      if (themeMeta && previousThemeColor !== undefined) themeMeta.content = previousThemeColor;
-      media.revert();
-    };
-  }, { scope: scene });
+      return () => {
+        window.removeEventListener("scroll", syncNavigation);
+        smallScreen.removeEventListener("change", syncNavigation);
+        if (previousEdgeBackground)
+          root.style.setProperty(
+            "--page-edge-background",
+            previousEdgeBackground,
+          );
+        else root.style.removeProperty("--page-edge-background");
+        if (themeMeta && previousThemeColor !== undefined)
+          themeMeta.content = previousThemeColor;
+        media.revert();
+      };
+    },
+    { scope: scene },
+  );
 
   return (
     <main data-page-theme="light">
@@ -248,7 +369,11 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
         <div className={styles.topNavigationLight} aria-hidden="true" inert>
           <HomeNavigation />
         </div>
-        <div className={styles.topNavigationCommitteesLight} aria-hidden="true" inert>
+        <div
+          className={styles.topNavigationCommitteesLight}
+          aria-hidden="true"
+          inert
+        >
           <HomeNavigation />
         </div>
       </nav>
@@ -263,11 +388,19 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
         </div>
       </div>
 
-      <section ref={aboutSection} id="about-us" className={styles.sectionThree} aria-labelledby="about-us-title">
+      <section
+        ref={aboutSection}
+        id="about-us"
+        className={styles.sectionThree}
+        aria-labelledby="about-us-title"
+      >
         <div className={styles.sectionThreeCopy}>
           <h2 id="about-us-title">{sectionThree.title}</h2>
           <p>{sectionThree.description}</p>
-          <Button asChild className="mt-6 bg-black text-white hover:bg-black/90 focus-visible:outline-black">
+          <Button
+            asChild
+            className="mt-6 bg-black text-white hover:bg-black/90 focus-visible:outline-black"
+          >
             <a href="/about">More About Us</a>
           </Button>
         </div>
@@ -277,7 +410,13 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
               <div
                 key={position}
                 className={`${styles.collageTile} ${position}`}
-                style={imageSources[image] ? { backgroundImage: `url(${JSON.stringify(imageSources[image])})` } : undefined}
+                style={
+                  imageSources[image]
+                    ? {
+                        backgroundImage: `url(${JSON.stringify(imageSources[image])})`,
+                      }
+                    : undefined
+                }
               />
             ))}
           </div>
@@ -293,7 +432,9 @@ export default function HeroScroll({ children, theme, theme_description }: { chi
             aria-labelledby="committees-title"
           >
             <div className={styles.ctaTheme}>
-              <h2 id="committees-title" className={styles.ctaThemeTitle}>Committees</h2>
+              <h2 id="committees-title" className={styles.ctaThemeTitle}>
+                Committees
+              </h2>
               <p className={styles.ctaThemeDescription}>
                 Explore each committee and discover the topics they offer.
               </p>

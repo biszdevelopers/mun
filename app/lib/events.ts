@@ -15,7 +15,10 @@ const eventDate = new Intl.DateTimeFormat("en-US", {
 const applicationLinks = new Map([
   [
     "show_committee_application_button",
-    { label: "Committee Applications", href: "https://bisz.dev/Committees2027" },
+    {
+      label: "Committee Applications",
+      href: "https://bisz.dev/Committees2027",
+    },
   ],
   [
     "show_chair_application_button",
@@ -33,10 +36,13 @@ function parseEvent(source: string) {
     throw new Error("Missing hero event");
   }
 
-  const { time, title, subtitle, hard_code, theme, theme_description } = config.hero;
+  const { time, title, subtitle, hard_code, theme, theme_description } =
+    config.hero;
   if (
     typeof time !== "string" ||
-    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(time) ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(
+      time,
+    ) ||
     !Number.isFinite(Date.parse(time)) ||
     typeof title !== "string" ||
     !title.trim() ||
@@ -51,8 +57,13 @@ function parseEvent(source: string) {
 
   const dateParts = eventDate.formatToParts(new Date(time));
   const day = Number(dateParts.find((part) => part.type === "day")?.value);
-  const suffix = day >= 11 && day <= 13 ? "th" : (["st", "nd", "rd"][day % 10 - 1] ?? "th");
-  const date = dateParts.map((part) => part.type === "day" ? `${day}${suffix}` : part.value).join("");
+  const suffix =
+    day >= 11 && day <= 13
+      ? "th"
+      : (["st", "nd", "rd"][(day % 10) - 1] ?? "th");
+  const date = dateParts
+    .map((part) => (part.type === "day" ? `${day}${suffix}` : part.value))
+    .join("");
 
   return {
     date,
@@ -61,11 +72,13 @@ function parseEvent(source: string) {
     body: subtitle.trim(),
     applicationLink: applicationLinks.get(hard_code ?? ""),
     theme,
-    theme_description
+    theme_description,
   };
 }
 
-const readRemoteEvent = assetUrl ? createRemoteAsset(assetUrl, parseEvent) : undefined;
+const readRemoteEvent = assetUrl
+  ? createRemoteAsset(assetUrl, parseEvent)
+  : undefined;
 let localEvent: Promise<ReturnType<typeof parseEvent> | undefined> | undefined;
 
 export async function getHeroTheme() {

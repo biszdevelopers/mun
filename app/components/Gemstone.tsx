@@ -6,7 +6,15 @@ import { preloadGem, gemResolution } from "../lib/gem-renderer";
 
 import styles from "./CommitteeSections.module.css";
 
-export default function Gemstone({ spec, label, id }: { spec: GemSpec; label: string; id?: string }) {
+export default function Gemstone({
+  spec,
+  label,
+  id,
+}: {
+  spec: GemSpec;
+  label: string;
+  id?: string;
+}) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [ready, setReady] = useState(false);
 
@@ -38,7 +46,8 @@ export default function Gemstone({ spec, label, id }: { spec: GemSpec; label: st
 
     const active = () => visible && !document.hidden && !disposed;
     const schedule = () => {
-      if (active() && renderer && !frame && !drawing && !failed) frame = requestAnimationFrame(draw);
+      if (active() && renderer && !frame && !drawing && !failed)
+        frame = requestAnimationFrame(draw);
     };
     const draw = async (now: number) => {
       frame = 0;
@@ -70,7 +79,9 @@ export default function Gemstone({ spec, label, id }: { spec: GemSpec; label: st
           tilt += (pointerTilt - tilt) * ease;
         }
         const spin = reducedMotion.matches ? 0 : time * 0.22 + yaw + impulse;
-        const lean = reducedMotion.matches ? 0 : Math.sin(time * 0.85) * 0.16 + tilt + impulse * 0.35;
+        const lean = reducedMotion.matches
+          ? 0
+          : Math.sin(time * 0.85) * 0.16 + tilt + impulse * 0.35;
         await renderer.renderGemFrame(target, spec, spin, lean, 8);
         if (!disposed && !painted) {
           painted = true;
@@ -86,39 +97,57 @@ export default function Gemstone({ spec, label, id }: { spec: GemSpec; label: st
     };
 
     const move = (event: PointerEvent) => {
-      if (event.pointerType === "touch" || !finePointer.matches || reducedMotion.matches) return;
+      if (
+        event.pointerType === "touch" ||
+        !finePointer.matches ||
+        reducedMotion.matches
+      )
+        return;
       // Use the same unaffected anchor as the emoji springs to avoid feedback.
       const rect = anchor.getBoundingClientRect();
       const dx = event.clientX - (rect.left + rect.width / 2);
       const dy = event.clientY - (rect.top + rect.height / 2);
-      const influence = Math.max(0, 1 - Math.hypot(dx, dy) / (rect.width / 2 + 180));
+      const influence = Math.max(
+        0,
+        1 - Math.hypot(dx, dy) / (rect.width / 2 + 180),
+      );
       pointerYaw = Math.max(-1, Math.min(1, dx / 100)) * influence * 0.85;
       pointerTilt = Math.max(-1, Math.min(1, dy / 100)) * influence * 0.6;
     };
-    const reset = () => { pointerYaw = 0; pointerTilt = 0; };
+    const reset = () => {
+      pointerYaw = 0;
+      pointerTilt = 0;
+    };
     const click = () => {
       if (!reducedMotion.matches) velocity = Math.max(-8, velocity - 4);
     };
     const refresh = () => {
       previous = 0;
-      if (reducedMotion.matches) { yaw = 0; tilt = 0; impulse = 0; velocity = 0; }
+      if (reducedMotion.matches) {
+        yaw = 0;
+        tilt = 0;
+        impulse = 0;
+        velocity = 0;
+      }
       schedule();
     };
     // Eagerly prepare even when the committee is off screen. The home loading overlay
     // awaits this same promise, including the first draw into this canvas.
-    void preloadGem(target, spec).then((prepared) => {
-      if (disposed) return;
-      renderer = prepared.renderer;
-      renderResolution = prepared.resolution;
-      painted = true;
-      setReady(true);
-      previous = 0;
-      schedule();
-    }).catch((error) => {
-      if (disposed) return;
-      failed = true;
-      console.warn(`Could not prepare ${label}.`, error);
-    });
+    void preloadGem(target, spec)
+      .then((prepared) => {
+        if (disposed) return;
+        renderer = prepared.renderer;
+        renderResolution = prepared.resolution;
+        painted = true;
+        setReady(true);
+        previous = 0;
+        schedule();
+      })
+      .catch((error) => {
+        if (disposed) return;
+        failed = true;
+        console.warn(`Could not prepare ${label}.`, error);
+      });
 
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -153,8 +182,16 @@ export default function Gemstone({ spec, label, id }: { spec: GemSpec; label: st
   }, [spec, label]);
 
   return (
-    <span className={styles.rubyGem} aria-hidden="true" data-ready={ready}
-      style={{ "--gem-color": `#${spec.color.toString(16).padStart(6, "0")}` } as CSSProperties}>
+    <span
+      className={styles.rubyGem}
+      aria-hidden="true"
+      data-ready={ready}
+      style={
+        {
+          "--gem-color": `#${spec.color.toString(16).padStart(6, "0")}`,
+        } as CSSProperties
+      }
+    >
       <span className={styles.rubyFallback} />
       <canvas ref={canvas} className={styles.rubyCanvas} data-home-gem={id} />
     </span>
