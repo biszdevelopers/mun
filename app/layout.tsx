@@ -27,6 +27,7 @@ const notoSerif = localFont({
 export const metadata: Metadata = {
   title: "MISZMUN",
   description: "MUN website",
+  icons: { icon: { url: "/favicon.ico", type: "image/x-icon" } },
 };
 
 export const viewport: Viewport = {
